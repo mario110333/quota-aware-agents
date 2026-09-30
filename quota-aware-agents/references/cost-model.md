@@ -1,0 +1,46 @@
+# Cost and usage accounting
+
+Use for a material price comparison, requested usage accounting, or routing calibration. Routine delegation does not require browsing prices or scanning logs. Refresh rates when the model, tier, billing surface, known pricing, or request for a current quote requires it. Unknown rates or usage remain unknown.
+
+## Official rate snapshot: 2026-09-30
+
+API Standard, short context, USD per million tokens:
+
+| Model | Uncached input | Cached input | Cache writes | Output |
+|---|---:|---:|---:|---:|
+| `gpt-6-astra` | 10.00 | 1.00 | 12.50 | 50.00 |
+| `gpt-6.1-sol` | 2.00 | 0.10 | 2.50 | 10.00 |
+| `gpt-6-luna` | 0.10 | 0.01 | 0.125 | 0.50 |
+
+Source: [OpenAI API pricing](https://developers.openai.com/api/docs/pricing). Long context has different rates. For historical `gpt-6-sol` accounting, the 2026-09-24 snapshot was 2.00 / 0.20 / 2.50 / 10.00 respectively; verify an applicable historical rate before presenting a bill. Do not apply 6.1 prices to earlier Sol usage without labeling a hypothetical repricing.
+
+Codex Standard, credits per million tokens:
+
+| Model | Input | Cached input | Output |
+|---|---:|---:|---:|
+| `gpt-6-astra` | 250 | 25 | 1,250 |
+| `gpt-6.1-sol` | 50 | 2.5 | 250 |
+| `gpt-6-sol` | 50 | 5 | 250 |
+| `gpt-6-luna` | 2.5 | 0.25 | 12.5 |
+
+Source: [Codex pricing](https://learn.chatgpt.com/docs/pricing). This workflow uses Standard only, per the entrypoint's user preference. For historical accelerated usage, consult the applicable official rates and distinguish purchased credits from included usage; never apply Standard silently to an unknown or different tier. Tokens, API-equivalent dollars, credit equivalents, actual charges, and subscription usage percentages are separate measures. Do not derive task subscription consumption from API prices or account-wide balance changes.
+
+## Calculate without double counting
+
+`cost = sum(tokens in each mutually exclusive billing category × its applicable rate) / 1,000,000 + separate tool fees`
+
+Cached input is generally included in input, and reasoning output in output: do not add either twice. Resolve cache-write semantics before pricing records with writes. Include all relevant parent and worker requests, coordination, acceptance, and observed retries once. Report missing model, tier, cache, tool fees, or telemetry as limits rather than zero. For a forecast, include expected repair; for measured use, count actual repair only.
+
+Compare total delegated cost with the direct alternative under the same quality requirement. Parent reimplementation, duplicate checks, and long repeated context can erase worker savings. Fixed-token repricing changes prices only, not success, token volume, caching, or retries; label it hypothetical. Benchmark cost per task is neither project cost nor cost per successful outcome. Define wall-time boundaries and how parallel work is counted before claiming speedups.
+
+## Optional local usage collector
+
+Run [summarize-usage.mjs](../scripts/summarize-usage.mjs) only when the user requests statistics or a material routing evaluation needs them. It uses Node's built-in `node:sqlite`; use an available compatible runtime. It reads the local Codex database and rollout files without exporting conversation text or credentials. The internal telemetry schema may change; unsupported or incomplete sources must be reported, not silently replaced with another accounting method.
+
+```text
+node <skill>/scripts/summarize-usage.mjs --thread <root-thread-id> --cutoff <ISO-time-with-timezone> --out <new-output-directory>
+```
+
+Use `--codex-home <directory>` or `--db <database-file>` for explicit source locations; otherwise the Codex home environment variable or the user's `.codex` directory is used. Consult `--help` for output options. Use a fixed cutoff to avoid including the accounting task itself. The collector must identify descendants, exclude inherited foreign-thread records, deduplicate response IDs, assign historical model/effort from matching turn context, and reconcile with per-thread cumulative counters. Missing records, unknown attribution, conflicts, and mismatches make the result partial; they are not proof of complete use. Legacy counters and current database model fields cannot replace request-level history.
+
+Keep a concise record in existing task evidence when useful: model/effort, first-pass acceptance, material defects and repair, parent duplication, checks, and measured/estimated/unknown usage. Retain one necessary report and validation evidence rather than duplicate ledgers or dashboards. Without comparable alternatives, say savings were not measured; small trials support local routing adjustments, not a universal savings percentage.
