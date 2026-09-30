@@ -1,13 +1,15 @@
 ---
 name: quota-aware-agents
-description: "Plan cost-aware delegation for substantial work with independent deliverables, including implementation, translation, analysis, and batch review. Reassess at phase changes; handle direct answers and one-step edits directly."
+description: "Plan cost-aware delegation in Codex using OpenAI models for substantial work with independent deliverables, including implementation, translation, analysis, and batch review. Reassess at phase changes; handle direct answers and one-step edits directly."
 license: MIT
 metadata:
   author: 'malioe'
-  version: '1.0.0'
+  version: '1.1.0'
 ---
 
-# Cost-aware agent delegation
+# Cost-aware agent delegation for Codex / OpenAI models
+
+Designed for Codex with OpenAI models and the live agent tools available in that session. Other OpenAI-model environments require adaptation of tool contracts, permissions, model availability, and usage collection; these instructions do not provide a standalone agent runtime.
 
 Meet the user's goal and required quality, then minimize **total completion cost**: main-agent work, workers, context, coordination, verification, and repair. Elapsed time is a secondary tradeoff. Delegation itself is not success, and lower token prices do not prove task savings.
 
@@ -19,7 +21,7 @@ Consult before substantial repeated processing or independently deliverable work
 
 Delegate only a bounded package with an outcome, acceptance criteria, exclusive ownership, and useful parallel work for the main agent. Usually use one worker; add another only for genuinely independent work within the current tool limit. Do not manufacture parallel work, split a coherent package to fill slots, or recursively delegate.
 
-Different files do not ensure independence. Resolve shared interfaces, data semantics, and interaction contracts first. When those are uncertain, complete and verify a representative end-to-end slice before parallel replication. A component's completion does not establish acceptance of the integrated result.
+Different files do not ensure independence. Resolve shared interfaces, data semantics, and interaction contracts first. When those are uncertain, complete and verify a representative end-to-end slice before parallel replication. A component's completion does not establish acceptance of the integrated result. For visual or interactive work, verify the complete representative layout and cross-mode behavior before broad replication or capture; passing isolated component checks is not a substitute.
 
 Read [model routing](references/model-routing.md) when a worker is worthwhile or model choice is requested. Read [cost and usage](references/cost-model.md) only for a material price tradeoff, requested usage accounting, or routing calibration. Reuse already-read, unchanged guidance. Current tool contracts, permissions, and user choices prevail; this skill does not change the main conversation's model or global configuration.
 
@@ -27,7 +29,7 @@ Read [model routing](references/model-routing.md) when a worker is worthwhile or
 
 Give the worker investigation, implementation or transformation, ordinary debugging, targeted verification, and related records together. Explicitly scoped integration and authorized delivery can also belong to that worker. Assign one writer per file and one owner per constrained resource, such as a shared app window, build directory, or benchmark environment.
 
-The main agent owns cross-package decisions and final accountability, without repeating routine work. Keep consequential requirement conflicts, architecture choices, disputed meaning, contradictory evidence, and critical experiment design with the main agent when needed; delegate the resulting execution when separable. Delegate no more authority than the user granted.
+The main agent owns cross-package decisions and final accountability, without repeating routine work. Keep a tightly coupled interaction or data path under one owner rather than dividing its controls, state, and command routing among workers. Keep consequential requirement conflicts, architecture choices, disputed meaning, contradictory evidence, and critical experiment design with the main agent when needed; delegate the resulting execution when separable. Delegate no more authority than the user granted.
 
 Default to `fork_turns="none"` with this compact task card:
 
@@ -41,7 +43,7 @@ Languages: visible communication follows this conversation; artifact follows use
 Return: result, paths, actual evidence, decisions, unresolved limits; usually 3–6 points.
 ```
 
-State critical constraints directly; summaries cannot replace indispensable originals. Confirm access and use a limited history fork when needed. Workers should flag gaps affecting correctness or authorization while continuing unaffected work. Relay new requirements and interface changes promptly. For continuation, send the delta only after confirming essential earlier context remains available; use a fresh worker for a new topic, unsuitable model, or excessive history.
+State critical constraints directly; summaries cannot replace indispensable originals. Verify current original paths before dispatch, confirm access, and use a limited history fork when needed. Workers should flag gaps affecting correctness or authorization while continuing unaffected work. Relay new requirements and interface changes promptly. For continuation, send the delta only after confirming essential earlier context remains available; use a fresh worker for a new topic, unsuitable model, or excessive history.
 
 ## Accept once, against the original request
 

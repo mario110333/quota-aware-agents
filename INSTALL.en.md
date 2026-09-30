@@ -1,8 +1,8 @@
 [简体中文](安装说明.md) | **English**
 
-# Install quota-aware-agents
+# Install quota-aware-agents for Codex / OpenAI Models
 
-**Author:** malioe · **Skill version:** 1.0.0 · **Version date:** 2026-09-30 · **License:** [MIT](LICENSE)
+**Author:** malioe · **Skill version:** 1.1.0 · **Version date:** 2026-10-01 · **License:** [MIT](LICENSE)
 
 A Codex skill for choosing suitable models, defining complete work packages, managing context, and accepting results while meeting the user's quality requirements. See the [English introduction](README.en.md) for usage examples and routing details. The skill instructions and reference files are written in English.
 

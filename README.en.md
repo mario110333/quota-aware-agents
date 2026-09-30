@@ -1,12 +1,16 @@
 [简体中文](README.md) | **English**
 
-# quota-aware-agents
+# quota-aware-agents — Delegation Skill for Codex / OpenAI Models
 
 A Codex skill for deciding when delegation is worth its total cost. Meet the user's quality requirements first, then compare direct work with a bounded worker package—including context, coordination, acceptance, and repair.
 
-**Author:** malioe · **Skill version:** 1.0.0 · **License:** [MIT](LICENSE) · **Speed preference:** Standard (normal speed)
+**Author:** malioe · **Skill version:** 1.1.0 · **License:** [MIT](LICENSE) · **Speed preference:** Standard (normal speed)
 
 [Install](#quickstart) · [Usage](#usage) · [Routing](#default-routing) · [FAQ](#faq)
+
+## Supported environment
+
+Designed for **OpenAI models in Codex**, such as GPT-6.1 Sol, GPT-6 Astra, and GPT-6 Luna, using the agent tools available in the current session. This is workflow guidance, not a standalone agent runtime or a grant of model access. Other OpenAI-model environments require adaptation of tool contracts, permissions, model availability, and usage collection.
 
 ## What it does
 
@@ -66,6 +70,13 @@ The skill respects the request's scope and current permissions. Installing it do
 2. **Package:** resolve shared contracts, define a bounded result and acceptance criteria, and give each file or constrained resource one owner. Usually start with one worker.
 3. **Execute:** let the worker complete its package while the main agent advances useful parallel work. Pass material changes promptly and reassess when evidence changes.
 4. **Accept:** inspect the result and evidence against the original request, verify necessary integration boundaries, repair material defects, and stop when acceptance is satisfied.
+
+## What's new in 1.1.0
+
+- With a 6.1 Sol main agent, keep shared contracts, the first integrated slice, and integration with the main agent. Same-model delegation needs independent context or useful parallel progress to justify its overhead.
+- With an Astra main agent, delegate separable ordinary execution to Sol. Astra is not an automatic second reviewer, and switching the main model does not restart plans or invalidate applicable checks.
+- Verify the complete layout and cross-mode behavior before expanding. Keep tightly coupled controls, state, and command routing under one owner.
+- Bound usage reviews by time, cutoff, and thread tree; do not add overlapping cumulative snapshots. Rate scenarios are not actual charges or promises of savings.
 
 ## Default routing
 

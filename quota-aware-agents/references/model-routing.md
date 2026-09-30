@@ -10,6 +10,17 @@ Routing baseline: 2026-09-30. For workers, first apply the entrypoint's delegati
 | Persistent reasoning difficulty, critical architecture, or data-protection judgment | `gpt-6-astra`, limited to the concrete question; normally `xhigh` | First diagnose context, tool, and environment failures. Scope Astra to the difficult decision; leave separable implementation with Sol. A separate worker still needs useful parallel work and independent value. |
 | Existing GPT-6 Sol workflows | Prefer migration to `gpt-6.1-sol` | Preserve task constraints and compare affected acceptance evidence; retain old Sol only for availability or an observed regression. |
 
+## Adapt to the main model
+
+Use the actual current main model, not the model that began the conversation. A user model switch preserves task scope, valid progress, and evidence; it does not require restarting planning, replacing suitable workers, or rerunning unchanged checks. Reassess outstanding package ownership and useful parallel work.
+
+| Main model | Keep with the main agent | Delegate when separable |
+|---|---|---|
+| GPT-6.1 Sol | Ordinary cross-module judgment, shared contracts, the first integrated slice, tightly coupled fixes, and final integration; xhigh is a recommendation for sustained judgment, not permission to change user settings | Sol high for clear complete packages; xhigh for interacting constraints. Same-model workers have no model-rate advantage: independent short context or useful parallel progress must justify framing, acceptance, and repair. |
+| GPT-6 Astra | Consequential tradeoffs, disputed evidence, critical experiment design, and cross-package decisions | Sol high/xhigh for suitable ordinary execution and local verification. Do small or tightly coupled work directly; do not manufacture a task merely to escape the parent rate. |
+
+Usually start with one worker after shared contracts are stable; add another only when ownership and execution resources are independent. Do not use Astra as an automatic second reviewer of Sol work. Escalate a concrete unresolved reasoning problem after ruling out context and environment faults. Where supported, deterministic scripts remain preferable to model delegation for counting, hashes, references, and exact extraction.
+
 ## Availability and adjustment
 
 - Check the live worker tool's model/effort combinations. An official release or model in the app does not establish worker-tool availability. If 6.1 Sol is unavailable, use supported `gpt-6-sol` / `xhigh` for a suitable package, or continue directly. For another unavailable combination, choose a supported suitable route or state the constraint; do not repeatedly probe IDs or silently substitute an older family. Explicit user model choices prevail.

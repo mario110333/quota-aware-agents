@@ -31,7 +31,15 @@ Source: [Codex pricing](https://learn.chatgpt.com/docs/pricing). This workflow u
 
 Cached input is generally included in input, and reasoning output in output: do not add either twice. Resolve cache-write semantics before pricing records with writes. Include all relevant parent and worker requests, coordination, acceptance, and observed retries once. Report missing model, tier, cache, tool fees, or telemetry as limits rather than zero. For a forecast, include expected repair; for measured use, count actual repair only.
 
-Compare total delegated cost with the direct alternative under the same quality requirement. Parent reimplementation, duplicate checks, and long repeated context can erase worker savings. Fixed-token repricing changes prices only, not success, token volume, caching, or retries; label it hypothetical. Benchmark cost per task is neither project cost nor cost per successful outcome. Define wall-time boundaries and how parallel work is counted before claiming speedups.
+Compare total delegated cost with the direct alternative under the same quality requirement. Parent reimplementation, duplicate checks, and long repeated context can erase worker savings. Fixed-token repricing changes prices only, not success, token volume, caching, or retries; label it hypothetical and never present its percentage as measured savings or a next-task budget promise. Benchmark cost per task is neither project cost nor cost per successful outcome. Define wall-time boundaries and how parallel work is counted before claiming speedups.
+
+## Scope a usage review
+
+State the time range, timezone, thread tree, and cutoff before presenting totals. Do not call a single update tree an entire day's account usage. Cumulative snapshots overlap: select one cutoff or deduplicate request records rather than adding snapshots. Earlier reports may span previous days or other threads; inspect their bounds before combining them. Reuse sufficient existing evidence and avoid a new worker or repeated collection merely to perform deterministic accounting.
+
+Separate parent and worker totals, as well as historical model totals. Parent cost can dominate even when workers are well routed. Attribute repair or coordination costs only where records support that separation; observations of late defects alone do not establish their exact token cost. An expensive package may contain necessary data-protection checks or statistical repetitions, not redundant work.
+
+For dollar or credit comparisons, establish per-request context bands and applicable historical rates. If the service tier is unavailable, report it as unknown; an explicitly labeled Standard-rate scenario is permissible, but not an actual bill. Keep subscription allowances, credit equivalents, API equivalents, and cash charges separate. Do not reconstruct missing request attribution from a mismatching cumulative counter.
 
 ## Optional local usage collector
 
