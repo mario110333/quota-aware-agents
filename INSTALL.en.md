@@ -2,7 +2,7 @@
 
 # Install quota-aware-agents for Codex / OpenAI Models
 
-**Author:** malioe · **Skill version:** 1.1.0 · **Version date:** 2026-10-01 · **License:** [MIT](LICENSE)
+**Author:** malioe · **Skill version:** 1.2.0 · **Version date:** 2026-10-03 · **License:** [MIT](LICENSE)
 
 A Codex skill for choosing suitable models, defining complete work packages, managing context, and accepting results while meeting the user's quality requirements. See the [English introduction](README.en.md) for usage examples and routing details. The skill instructions and reference files are written in English.
 
@@ -25,7 +25,7 @@ This requires the installer and installation permissions to be available in the 
    .\Install.ps1
    ```
 
-3. The script checks the SHA-256 hashes of six skill files against [checksums.json](checksums.json), verifies the copied files, and installs to the current user's `.agents\skills\quota-aware-agents`. Administrator rights are not required. If a folder with that name already exists, the script stops without overwriting it; back up and move the old folder before installing again.
+3. The script checks the complete skill manifest against [checksums.json](checksums.json), verifies the copied files, and installs to the current user's `.agents\skills\quota-aware-agents`. Administrator rights are not required. If a folder with that name already exists, the script stops without overwriting it; back up and move the old folder before installing again.
 4. If your execution policy blocks the script, use manual installation below. You do not need to change the system execution policy.
 
 Run the script from the extracted repository root, where [Install.ps1](Install.ps1), `checksums.json`, and the `quota-aware-agents` folder are together.
@@ -65,9 +65,11 @@ The skill allows automatic selection when a task matches its description. Explic
 
 The skill does not grant additional permissions or switch the main conversation's model or global settings. Model/effort support depends on the current tool and account. If 6.1 Sol is unavailable, use supported 6 Sol xhigh for a suitable package, or continue directly; other unavailable combinations require a suitable supported route or an explicit statement of the constraint. See [model routing](quota-aware-agents/references/model-routing.md) for the full rules.
 
-## Optional usage statistics
+## Optional helper scripts
 
-Ordinary skill use has no additional runtime dependency. Running [scripts/summarize-usage.mjs](quota-aware-agents/scripts/summarize-usage.mjs) requires Node.js with `node:sqlite` read-only support; the packaged script was verified with **Node.js 24.21.0**.
+The instructions themselves have no additional runtime dependency. The optional [model resolver](quota-aware-agents/scripts/resolve-main-model.mjs) and [usage collector](quota-aware-agents/scripts/summarize-usage.mjs) use Node.js with read-only `node:sqlite` support; the validation environment is **Node.js 24.21.0**. Reuse reliable current host metadata when available; otherwise use the resolver where supported or generic routing.
+
+The resolver verifies the current session and active turn, returning minimal model metadata without changing settings. Missing bindings, conflicts, or unsupported internal formats return unknown and do not block independent authorized work. Inspect `node <skill-path>/scripts/resolve-main-model.mjs --help` and [model routing](quota-aware-agents/references/model-routing.md).
 
 Run the collector manually only when needed. Start by checking its options:
 
@@ -76,6 +78,8 @@ node <skill-path>/scripts/summarize-usage.mjs --help
 ```
 
 It reads local Codex databases and rollout logs in read-only mode and writes reports to the specified new directory. Summary output is the default; it does not upload data or export conversation text or credentials. Reports can contain local paths and conversation identifiers, so inspect them before sharing.
+
+Use optional `--since` (exclusive start), required `--cutoff` (inclusive end), and repeated `--thread` for multiple explicit roots. Shared descendants are counted once; source groups and cumulative scopes are explained in [cost and usage](quota-aware-agents/references/cost-model.md). The output directory must not already exist.
 
 Internal Codex log formats can change. Unsupported or incomplete records must be reported, and statistics are not an actual bill, a measure of subscription allowance consumption, or proof of savings. API amounts, Codex credits, and subscription usage are separate measures. The cost reference's current snapshot is dated **2026-09-30**, with historical rates dated separately; verify applicable rates when needed. The skill does not promise a fixed saving percentage.
 

@@ -6,7 +6,7 @@
 
 [安装](#安装) · [使用示例](#使用示例) · [默认路由](#默认路由) · [常见问题](#常见问题) · [版本发布](https://github.com/mario110333/quota-aware-agents/releases)
 
-用于 Codex 的按需分工 Skill。先达到用户要求的质量，再比较直接完成与代理分工的总完成成本，包括上下文、协调、验收和返工。作者：**malioe**；版本：**1.1.0**。
+用于 Codex 的按需分工 Skill。识别当前主模型并适配策略，先达到用户要求的质量，再比较直接完成与代理分工的总完成成本，包括上下文、协调、验收和返工。作者：**malioe**；版本：**1.2.0**。
 
 适用于有清楚边界的实现、分析、翻译和批量审查。简单问答、小修改和确定性操作直接处理；只有主代理能同时推进有用工作时，才交给代理一个完整工作包。在阶段变化、执行者完成或出现关键新证据后重新判断。
 
@@ -19,6 +19,7 @@
 | 能力 | 实际做法 |
 | --- | --- |
 | 判断是否值得分工 | 将任务说明、代理执行、协调、验收与预计返工一起纳入成本 |
+| 适配当前主模型 | 核对当前会话与轮次的模型信息，按 Astra、Sol、其他或未知模型选择策略 |
 | 按任务选择模型 | 根据歧义、失败代价、原始资料依赖和可验证程度选择模型与推理强度 |
 | 减少碎片化交接 | 将调查、实现、普通调试、必要验证和相关记录作为完整工作包交付 |
 | 控制上下文与冲突 | 使用精简任务卡，明确原始资料、文件归属和共享资源负责人 |
@@ -26,12 +27,25 @@
 
 共享接口或需求尚未稳定时，先完成并验证一个有代表性的端到端流程，再扩展并行工作。组件分别完成，不代表整体已经验收。
 
-## 1.1.0 更新
+## 1.2.0 更新
 
-- 主模型为 6.1 Sol 时，主代理负责共享契约、完整样板和整合；同型号代理只有独立上下文或有效并行能抵消协调成本时才值得使用。
-- 主模型为 Astra 时，可分离的普通执行交给 Sol；不把 Astra 固定设为第二审查环节，也不因切换模型重启计划或重复验证。
-- 先验证完整布局及跨模式行为，再扩展；紧密耦合的控制、状态与命令路由由同一负责人完成。
-- 用量复盘明确时间范围、截止和线程树，避免累计快照重复相加；统一费率折算不冒充实际扣费或节省承诺。
+- 将 1.1.0 已有的主模型分工原则补成可靠识别流程：优先当前宿主元数据，必要时用只读辅助脚本核对会话与活动轮次；识别失败采用通用策略。
+- 补齐其他及未知主模型的分支。切换模型后重评剩余工作，保留成果、合适的执行者与有效验收。
+- 按需处理共享运行资源和实验观察，区分有效阴性与无结论；失败先诊断原因，再调整。
+- 统计支持开始时间、多个显式根及来源分组，期间量与生命周期累计分别诊断；未知费用仍为未知。
+
+原有完整分包、Sol high/xhigh 起点、Standard 速度、脚本优先和通过后停止继续保留。升级不承诺固定节省比例。
+
+## 主模型自适应
+
+| 当前主模型 | 默认分工判断 |
+| --- | --- |
+| Astra | 主方保留重大取舍和关键判断；适合的普通完整包交给 Sol，仍需有用并行工作 |
+| 6.1 Sol | 主方直接承担常规实现、共享契约及整合；同模型委派须由短上下文或有效并行抵消协作成本 |
+| 旧 Sol、Luna 或其他型号 | 按确切型号的能力证据、当前工具与任务风险判断，不统一归为 Sol |
+| 未知或未映射型号 | 继续通用分工判断，不猜模型，也不因识别失败阻断已授权工作 |
+
+自动适配由 Skill 指引当前代理执行；已有可靠信息时直接复用，无可靠信息时按环境能力选择辅助脚本或通用策略。它没有常驻后台监听，也不改变主对话模型或全局设置。详见[模型路由](quota-aware-agents/references/model-routing.md)。
 
 ## 默认路由
 
@@ -57,7 +71,7 @@
 请使用 $skill-installer 从 https://github.com/mario110333/quota-aware-agents/tree/main/quota-aware-agents 安装这个 Skill。
 ```
 
-Windows 用户也可[下载最新仓库 ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip)，解压后在包含 `Install.ps1` 的目录运行 `./Install.ps1`。脚本按 [checksums.json](checksums.json) 校验六个 Skill 文件，无需管理员权限；已有同名目录时停止，不覆盖旧版。
+Windows 用户也可[下载最新仓库 ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip)，解压后在包含 `Install.ps1` 的目录运行 `./Install.ps1`。脚本按 [checksums.json](checksums.json) 校验完整 Skill 文件清单，无需管理员权限；已有同名目录时停止，不覆盖旧版。
 
 Windows / macOS / Linux 均可手动将内层 `quota-aware-agents` 文件夹整体复制到 `~/.agents/skills/`，最终入口为 `~/.agents/skills/quota-aware-agents/SKILL.md`。更新前先备份并移走旧目录，避免混合版本；如果 Skill 未显示，重启 Codex。完整操作见[中文安装说明](安装说明.md)或 [English installation guide](INSTALL.en.md)。
 
@@ -94,7 +108,7 @@ Skill 允许按任务自动调用，但调用后仍需判断是否值得分工�
 
 ## 工作流程
 
-1. **判断**：比较直接完成与委派的总成本，先确认任务质量要求。
+1. **判断**：确认质量要求，识别当前主模型并适配策略，比较直接完成与委派的总成本。
 2. **分包**：写清交付结果、关键约束、原始资料、文件归属、验收要求与输出语言。
 3. **执行**：代理负责完整工作包；主代理推进有用的并行工作并处理跨工作包决策。
 4. **验收**：按原始需求核对结果与证据，针对缺口修正，通过后停止重复检查。
@@ -105,7 +119,9 @@ Skill 允许按任务自动调用，但调用后仍需判断是否值得分工�
 
 [费用与用量说明](quota-aware-agents/references/cost-model.md)中的费用快照日期是 **2026-09-30**，历史费率分别注明日期。它们是带日期的参考，后续比较应核实适用费率；API 金额、Codex credits、实际收费和订阅用量不能混算。本 Skill 不承诺固定节省百分比，也不把模型价格差直接当作任务节省。
 
-普通使用不需要 Node.js。可选的 [本地统计脚本](quota-aware-agents/scripts/summarize-usage.mjs)需要支持 `node:sqlite` 只读模式的 Node.js，已在 Node.js 24.21.0 验证。仅按需要手动运行，先用 `node <脚本路径> --help` 查看参数。
+使用指引本身不要求 Node.js。可选的[模型识别辅助脚本](quota-aware-agents/scripts/resolve-main-model.mjs)与[本地统计脚本](quota-aware-agents/scripts/summarize-usage.mjs)使用支持 `node:sqlite` 只读模式的 Node.js，验证环境为 Node.js 24.21.0。识别辅助脚本只在缺可靠宿主信息且本地适配可用时需要；统计仅在复盘需要时运行。先用 `node <脚本路径> --help` 查看参数。
+
+统计的 `--since` 排除开始时刻、`--cutoff` 包含截止时刻，重复 `--thread` 选入多个根；共同后代只计一次。主对话、主动子任务、自动审批与未知来源分别报告，不自动扫描或归入全部账号活动。
 
 脚本只读读取本机 Codex 数据库与日志，在指定的新目录写入统计结果，默认输出摘要，不上传数据。输出可能含本机路径与会话标识，公开分享前请检查；仓库不包含作者的会话、账号配置、凭据或旧用量数据。内部日志格式变化或记录缺失会使统计不完整，结果不能当作实际账单、订阅额度或已测得的节省。
 
@@ -132,7 +148,9 @@ Skill 允许按任务自动调用，但调用后仍需判断是否值得分工�
 | --- | --- |
 | [SKILL.md](quota-aware-agents/SKILL.md) | 分工判断、工作包与验收规则 |
 | [model-routing.md](quota-aware-agents/references/model-routing.md) | 模型与推理强度选择 |
+| [execution-evidence.md](quota-aware-agents/references/execution-evidence.md) | 共享运行资源、实验观察与停止条件 |
 | [cost-model.md](quota-aware-agents/references/cost-model.md) | 费用口径与用量核算边界 |
+| [resolve-main-model.mjs](quota-aware-agents/scripts/resolve-main-model.mjs) | 可选的当前模型只读识别 |
 | [summarize-usage.mjs](quota-aware-agents/scripts/summarize-usage.mjs) | 可选的本地只读统计 |
 | [安装说明](安装说明.md) / [INSTALL.en.md](INSTALL.en.md) | 中英文安装、更新与卸载 |
 | [Install.ps1](Install.ps1) / [checksums.json](checksums.json) | Windows 安装与文件校验 |

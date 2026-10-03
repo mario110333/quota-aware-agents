@@ -4,7 +4,7 @@
 
 A Codex skill for deciding when delegation is worth its total cost. Meet the user's quality requirements first, then compare direct work with a bounded worker package—including context, coordination, acceptance, and repair.
 
-**Author:** malioe · **Skill version:** 1.1.0 · **License:** [MIT](LICENSE) · **Speed preference:** Standard (normal speed)
+**Author:** malioe · **Skill version:** 1.2.0 · **License:** [MIT](LICENSE) · **Speed preference:** Standard (normal speed)
 
 [Install](#quickstart) · [Usage](#usage) · [Routing](#default-routing) · [FAQ](#faq)
 
@@ -17,6 +17,7 @@ Designed for **OpenAI models in Codex**, such as GPT-6.1 Sol, GPT-6 Astra, and G
 - Reassesses delegation before substantial repeated processing or independent work, and again after phase changes, worker completion, or material new evidence.
 - Gives a worker a complete package: investigation, execution, ordinary debugging, targeted verification, and related records, with clear ownership and acceptance criteria.
 - Chooses a suitable starting model and reasoning effort using the current tool's supported combinations.
+- Adapts the strategy to main-model metadata bound to the current conversation and active turn; unknown identification falls back to generic judgment.
 - Keeps the main agent accountable for shared decisions and integration, without repeating routine worker work.
 
 Suitable tasks include implementation, analysis, translation, and batch review with clear boundaries. Short answers, small edits, tightly coupled work, and deterministic operations usually stay with the main agent or a script. Delegation requires useful parallel work for the main agent; using more agents is not the objective.
@@ -35,7 +36,7 @@ Automatic installation depends on the installer and permissions available in you
 
 Other options:
 
-- **Windows:** download the [main-branch ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies six skill files against [checksums.json](checksums.json), installs for the current user without administrator rights, and stops if the destination already exists.
+- **Windows:** download the [main-branch ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies the complete skill manifest against [checksums.json](checksums.json), installs for the current user without administrator rights, and stops if the destination already exists.
 - **Windows / macOS / Linux:** copy the entire `quota-aware-agents` folder into `~/.agents/skills/`. Back up and move an existing copy outside skill search directories before installing an update.
 
 See [the installation guide](INSTALL.en.md) for commands, updates, removal, and troubleshooting. Use the main-branch ZIP for these bilingual documents; the original 1.0.0 release archive contains its original documentation.
@@ -66,17 +67,30 @@ The skill respects the request's scope and current permissions. Installing it do
 
 ## Workflow
 
-1. **Decide:** compare direct execution with framing, worker execution, acceptance, and expected repair under the same quality requirement.
+1. **Decide:** establish quality requirements, identify the current main model and adapt the strategy, then compare direct execution with framing, worker execution, acceptance, and expected repair.
 2. **Package:** resolve shared contracts, define a bounded result and acceptance criteria, and give each file or constrained resource one owner. Usually start with one worker.
 3. **Execute:** let the worker complete its package while the main agent advances useful parallel work. Pass material changes promptly and reassess when evidence changes.
 4. **Accept:** inspect the result and evidence against the original request, verify necessary integration boundaries, repair material defects, and stop when acceptance is satisfied.
 
-## What's new in 1.1.0
+## What's new in 1.2.0
 
-- With a 6.1 Sol main agent, keep shared contracts, the first integrated slice, and integration with the main agent. Same-model delegation needs independent context or useful parallel progress to justify its overhead.
-- With an Astra main agent, delegate separable ordinary execution to Sol. Astra is not an automatic second reviewer, and switching the main model does not restart plans or invalidate applicable checks.
-- Verify the complete layout and cross-mode behavior before expanding. Keep tightly coupled controls, state, and command routing under one owner.
-- Bound usage reviews by time, cutoff, and thread tree; do not add overlapping cumulative snapshots. Rate scenarios are not actual charges or promises of savings.
+- Gives the existing main-model strategy a reliable identification workflow: prefer current host metadata, or use an optional read-only helper that verifies session and active-turn bindings. Unknown identification keeps generic routing available.
+- Adds other-model and unknown-model handling. Refresh after a model switch while retaining valid progress, suitable workers, and applicable acceptance evidence.
+- Provides conditional guidance for shared runtime resources, observation validity, and evidence-based stopping or diagnosis changes.
+- Adds usage start times, multiple explicit roots, and source groups. Period totals and lifetime cumulative diagnostics remain distinct; unknown amounts are not zero.
+
+Complete packages, Sol high/xhigh starting points, Standard speed, deterministic tools, and stopping after acceptance remain in place. No fixed savings percentage is promised.
+
+## Adapt to the main model
+
+| Current main model | Strategy |
+| --- | --- |
+| Astra | Keep consequential decisions with the main agent; suitable ordinary complete packages can use Sol when the main agent has useful parallel work. |
+| 6.1 Sol | Keep ordinary implementation, shared contracts, and integration direct; same-model workers need shorter context or useful parallel value to justify overhead. |
+| Old Sol, Luna, or another model | Use evidence about the exact model, supported tools, and task risk; do not classify every non-Astra model as Sol. |
+| Unknown or unmapped | Continue generic delegation judgment without guessing or blocking authorized work on routine confirmation. |
+
+The skill guides the current agent to adapt when used. It reuses reliable metadata or falls back according to the environment; it does not install a background model watcher or change main-model settings. See [model routing](quota-aware-agents/references/model-routing.md).
 
 ## Default routing
 
@@ -124,13 +138,15 @@ No. Both guides describe the same rules, with English instructions and reference
 
 ## Optional local usage statistics
 
-Ordinary skill use does not require Node.js. The optional [summarize-usage.mjs](quota-aware-agents/scripts/summarize-usage.mjs) collector requires Node.js with `node:sqlite` read-only support; the packaged script was verified with **Node.js 24.21.0**. Run it manually only when statistics are requested or a material routing evaluation needs them, starting with:
+The instructions themselves do not require Node.js. The optional [resolver](quota-aware-agents/scripts/resolve-main-model.mjs) and [collector](quota-aware-agents/scripts/summarize-usage.mjs) use Node.js with read-only `node:sqlite` support; the validation environment is **Node.js 24.21.0**. Reuse reliable host model metadata, otherwise use the resolver where supported or generic routing. Run statistics only when requested or a material routing evaluation needs them, starting with:
 
 ```text
 node <skill-path>/scripts/summarize-usage.mjs --help
 ```
 
 It reads local Codex database and rollout records in read-only mode and writes reports to a specified new output directory. It defaults to summary output and does not upload data or export conversation text or credentials. Reports can contain local paths and conversation identifiers; inspect them before sharing. The repository does not include the author's conversations, account configuration, credentials, or historical usage records.
+
+The collector accepts an exclusive `--since` start, an inclusive `--cutoff` end, and repeated `--thread` roots. It deduplicates shared descendants and reports main, worker, approval, and unknown source groups within the selected scope. Output directories must not already exist. See [cost and usage](quota-aware-agents/references/cost-model.md) for period versus lifetime cumulative diagnostics.
 
 Internal telemetry changes or missing records can make results partial. Token counts, API-equivalent amounts, Codex credits, actual charges, and subscription usage are separate measures. The output is not a bill or proof of savings. The [cost and usage reference](quota-aware-agents/references/cost-model.md) contains a **2026-09-30** rate snapshot and separately dated historical rates; verify applicable rates when a later comparison requires them.
 
@@ -141,9 +157,11 @@ Internal telemetry changes or missing records can make results partial. Token co
 | [INSTALL.en.md](INSTALL.en.md) | Installation, updates, removal, and troubleshooting |
 | [SKILL.md](quota-aware-agents/SKILL.md) | Core delegation and acceptance instructions |
 | [model-routing.md](quota-aware-agents/references/model-routing.md) | Model/effort routes, fallback, and calibration |
+| [execution-evidence.md](quota-aware-agents/references/execution-evidence.md) | Shared runtime resources, observation validity, and stopping criteria |
 | [cost-model.md](quota-aware-agents/references/cost-model.md) | Cost accounting and limits of usage evidence |
 | [openai.yaml](quota-aware-agents/agents/openai.yaml) | Skill UI metadata and invocation policy |
 | [summarize-usage.mjs](quota-aware-agents/scripts/summarize-usage.mjs) | Optional local usage collector |
+| [resolve-main-model.mjs](quota-aware-agents/scripts/resolve-main-model.mjs) | Optional read-only current-model adapter |
 | [Install.ps1](Install.ps1) / [checksums.json](checksums.json) | Windows installation and integrity manifest |
 
 ## Feedback and license

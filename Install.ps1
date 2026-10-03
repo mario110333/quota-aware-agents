@@ -2,8 +2,20 @@
 param([string]$DestinationRoot = (Join-Path ([Environment]::GetFolderPath('UserProfile')) '.agents/skills'))
 $ErrorActionPreference = 'Stop'
 $sourceRoot = Join-Path $PSScriptRoot 'quota-aware-agents'
-$files = @('SKILL.md', 'agents/openai.yaml', 'references/model-routing.md', 'references/cost-model.md', 'scripts/summarize-usage.mjs', 'LICENSE')
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'checksums.json') -Raw | ConvertFrom-Json
+$files = @($manifest.files | ForEach-Object { $_.path })
+if ($manifest.name -ne 'quota-aware-agents' -or $files.Count -eq 0 -or $files -notcontains 'SKILL.md' -or $files -notcontains 'LICENSE') { throw 'Invalid package manifest' }
+$sourceBase = (Resolve-Path -LiteralPath $sourceRoot).Path.TrimEnd([IO.Path]::DirectorySeparatorChar)
+if (@($files | Sort-Object -Unique).Count -ne $files.Count) { throw 'Duplicate package paths' }
+foreach ($relative in $files) {
+    if ($relative -isnot [string] -or $relative -notmatch '^[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)*$' -or @($relative.Split('/') | Where-Object { $_ -eq '.' -or $_ -eq '..' }).Count -gt 0) { throw 'Invalid package path' }
+    $resolvedSource = [IO.Path]::GetFullPath((Join-Path $sourceBase $relative))
+    if (-not $resolvedSource.StartsWith($sourceBase + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'Package path escaped source' }
+    if ((Get-Item -LiteralPath $resolvedSource).Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Package links are not supported' }
+}
+if ((Get-Item -LiteralPath $sourceBase).Attributes -band [IO.FileAttributes]::ReparsePoint -or @(Get-ChildItem -LiteralPath $sourceBase -Force -Recurse | Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint }).Count -gt 0) { throw 'Package links are not supported' }
+$actualFiles = @(Get-ChildItem -LiteralPath $sourceBase -File -Force -Recurse | ForEach-Object { $_.FullName.Substring($sourceBase.Length + 1).Replace('\', '/') })
+if (@(Compare-Object ($files | Sort-Object) ($actualFiles | Sort-Object)).Count -gt 0) { throw 'Package files differ from manifest' }
 foreach ($relative in $files) {
     $expected = $manifest.files | Where-Object { $_.path -eq $relative }
     if (@($expected).Count -ne 1 -or (Get-FileHash -LiteralPath (Join-Path $sourceRoot $relative) -Algorithm SHA256).Hash -ne $expected.sha256) {

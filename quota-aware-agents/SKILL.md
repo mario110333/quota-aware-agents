@@ -1,10 +1,10 @@
 ---
 name: quota-aware-agents
-description: "Plan cost-aware delegation in Codex using OpenAI models for substantial work with independent deliverables, including implementation, translation, analysis, and batch review. Reassess at phase changes; handle direct answers and one-step edits directly."
+description: "Plan cost-aware delegation in Codex using OpenAI models for substantial implementation, translation, analysis, or batch review. Adapt to the verified current main model and reassess at phase changes; handle short answers and small edits directly."
 license: MIT
 metadata:
   author: 'malioe'
-  version: '1.1.0'
+  version: '1.2.0'
 ---
 
 # Cost-aware agent delegation for Codex / OpenAI models
@@ -15,6 +15,12 @@ Meet the user's goal and required quality, then minimize **total completion cost
 
 **Speed preference: always Standard (normal speed).** Do not enable, request, or recommend Fast, Ultrafast, or another paid acceleration mode for this workflow. Reasoning effort (high/xhigh/max) is independent of speed mode. When a tool exposes a speed selector, select Standard; when it does not, do not infer the mode or claim it was changed. A future explicit user instruction can revise this preference.
 
+## Resolve the current main model
+
+Before a substantive routing decision, use reliable host metadata bound to this conversation and active turn. If it is unavailable, use the optional read-only [model resolver](scripts/resolve-main-model.mjs) where supported; see [model routing](references/model-routing.md) for binding and fallback rules. A worker's own model is not evidence of the main conversation's model.
+
+Refresh at a new turn or observed model change; reuse a verified result within the same turn. Defaults, old turns, model lists, and latency cannot establish the current model. If identification fails, continue with the generic delegation test without guessing or requiring routine user confirmation. Explicit user constraints prevail. This skill selects work strategy and supported worker combinations; it does not change the main model or global settings.
+
 ## Decide whether to delegate
 
 Consult before substantial repeated processing or independently deliverable work. Reassess at phase changes, worker completion, or material new evidence. Compare direct execution with framing + worker execution + acceptance + expected repair. Prefer direct work for short, tightly coupled, or deterministic operations.
@@ -23,7 +29,7 @@ Delegate only a bounded package with an outcome, acceptance criteria, exclusive 
 
 Different files do not ensure independence. Resolve shared interfaces, data semantics, and interaction contracts first. When those are uncertain, complete and verify a representative end-to-end slice before parallel replication. A component's completion does not establish acceptance of the integrated result. For visual or interactive work, verify the complete representative layout and cross-mode behavior before broad replication or capture; passing isolated component checks is not a substitute.
 
-Read [model routing](references/model-routing.md) when a worker is worthwhile or model choice is requested. Read [cost and usage](references/cost-model.md) only for a material price tradeoff, requested usage accounting, or routing calibration. Reuse already-read, unchanged guidance. Current tool contracts, permissions, and user choices prevail; this skill does not change the main conversation's model or global configuration.
+Use [model routing](references/model-routing.md) to select the main-model strategy and, when delegation is worthwhile, the worker route. Read [execution evidence](references/execution-evidence.md) only when shared runtime resources, experiments, or observation validity matter. Read [cost and usage](references/cost-model.md) only for a material price tradeoff, requested usage accounting, or routing calibration. Reuse already-read, unchanged guidance. Current tool contracts, permissions, and user choices prevail.
 
 ## Assign a complete package
 
