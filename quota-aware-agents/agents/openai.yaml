@@ -1,6 +1,6 @@
 interface:
   display_name: "Codex / OpenAI Cost-Aware Delegation"
   short_description: "Model-adaptive, cost-aware delegation in Codex"
-  default_prompt: "Use $quota-aware-agents to adapt substantial work to the verified current main model, assign worthwhile complete packages, and reassess at each phase while preserving quality."
+  default_prompt: "Use $quota-aware-agents to adapt substantial work to the verified current main model, assign worthwhile complete packages, refresh worker speed from the latest main selection before dispatch or reuse, and preserve quality."
 policy:
   allow_implicit_invocation: true

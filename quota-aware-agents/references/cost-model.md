@@ -23,7 +23,7 @@ Codex Standard, credits per million tokens:
 | `gpt-6-sol` | 50 | 5 | 250 |
 | `gpt-6-luna` | 2.5 | 0.25 | 12.5 |
 
-Source: [Codex pricing](https://learn.chatgpt.com/docs/pricing). This workflow uses Standard only, per the entrypoint's user preference. For historical accelerated usage, consult the applicable official rates and distinguish purchased credits from included usage; never apply Standard silently to an unknown or different tier. Tokens, API-equivalent dollars, credit equivalents, actual charges, and subscription usage percentages are separate measures. Do not derive task subscription consumption from API prices or account-wide balance changes.
+Source: [Codex pricing](https://learn.chatgpt.com/docs/pricing). The tables are Standard-rate reference scenarios; worker speed follows the current main selection under [speed following](speed-following.md). For current or historical accelerated usage, consult the applicable official rates and distinguish purchased credits from included usage; never apply Standard silently to an unknown or different tier. A selected or requested mode does not establish the applied tier of every worker/request. Tokens, API-equivalent dollars, credit equivalents, actual charges, and subscription usage percentages are separate measures. Do not derive task subscription consumption from API prices or account-wide balance changes.
 
 ## Calculate without double counting
 

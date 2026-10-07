@@ -1,44 +1,52 @@
 {
   "name": "quota-aware-agents",
   "author": "malioe",
-  "version": "1.2.0",
-  "version_date": "2026-10-03",
+  "version": "1.3.0",
+  "version_date": "2026-10-07",
   "files": [
     {
-      "sha256": "8C99E8286780C80F9A0FAFE30D6848BBE7692FBA7EFB511FEED6D0CE5CB65B1F",
-      "path": "LICENSE"
+      "path": "LICENSE",
+      "sha256": "8C99E8286780C80F9A0FAFE30D6848BBE7692FBA7EFB511FEED6D0CE5CB65B1F"
     },
     {
-      "sha256": "6A66E50A006B19AEFA3052509126691E66DB122466ACF35E29E045E811A8B3E6",
-      "path": "SKILL.md"
+      "path": "SKILL.md",
+      "sha256": "13B6FA965A72F290E58D2860E5F0BF663E98BA1F140611FBE391ACC539FCEE7F"
     },
     {
-      "sha256": "E3FDC0723825FB4CD0BBDFA5176EAA0E8FEB917C387A985CE5A4E864D1C6BC3D",
-      "path": "agents/openai.yaml"
+      "path": "agents/openai.yaml",
+      "sha256": "F0692454405833A3D9987D027277B7FD73AA5D0F0D625F842F74BE302167E747"
     },
     {
-      "sha256": "4572F24B43A2FBF5D625D0E2F79FE2A4E8BC9B7179C32D0F37EFDE4875557CA1",
-      "path": "references/cost-model.md"
+      "path": "references/astra-consultation.md",
+      "sha256": "C2946D1D3079721659D8B5283A6BA863C0DA647953CCF4E0A40D063E519D2486"
     },
     {
-      "sha256": "CA435F6189F5F05CE68A5F4C3226C70E08D30D4D88ACC5B001F079A46B53F054",
-      "path": "references/execution-evidence.md"
+      "path": "references/cost-model.md",
+      "sha256": "800BDDE637F011A9DDF442874790EC0259BDD11575039DA267591B00CC2046C8"
     },
     {
-      "sha256": "A8DD5E59E4363037CF8FDA4D58F5BE081F05E661280764E5D99587420238FF5D",
-      "path": "references/model-routing.md"
+      "path": "references/execution-evidence.md",
+      "sha256": "CA435F6189F5F05CE68A5F4C3226C70E08D30D4D88ACC5B001F079A46B53F054"
     },
     {
-      "sha256": "D33F369ED0AD01497948B1BD52898FE5C73C406F108BCACF021B72CA4BC29883",
-      "path": "scripts/resolve-main-model.mjs"
+      "path": "references/model-routing.md",
+      "sha256": "4ECAB0D329BCB69E8507713D7EA02BC04D7085FAB0CC663A7FFD898CAA2592CD"
     },
     {
-      "sha256": "E5A259CB9E67C74F0139F0A458A2DD1682AAC3B4FC89D186556AA02B2F86B8C3",
-      "path": "scripts/summarize-usage.mjs"
+      "path": "references/speed-following.md",
+      "sha256": "231E80098B8467B82FCFF2F860F20B059FA5D24562E4FEA36F18492691E09A91"
     },
     {
-      "sha256": "7DBCFCB8F298CCB2D5A1D567E95A849409405CA5A83CB9664AF4655C327BDA14",
-      "path": "scripts/telemetry-utils.mjs"
+      "path": "scripts/resolve-main-model.mjs",
+      "sha256": "D33F369ED0AD01497948B1BD52898FE5C73C406F108BCACF021B72CA4BC29883"
+    },
+    {
+      "path": "scripts/summarize-usage.mjs",
+      "sha256": "9C5C4E9E098C5BF7E5E8A44060BE835F72F1E9F8A3D4ECBE3DF01B6ACBF3A8E9"
+    },
+    {
+      "path": "scripts/telemetry-utils.mjs",
+      "sha256": "7DBCFCB8F298CCB2D5A1D567E95A849409405CA5A83CB9664AF4655C327BDA14"
     }
   ]
 }

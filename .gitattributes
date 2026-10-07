@@ -1,0 +1,2 @@
+# Keep manifest hashes identical in archives and Windows Git checkouts.
+* text eol=lf
