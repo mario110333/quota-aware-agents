@@ -2,7 +2,7 @@
 
 # Install quota-aware-agents for Codex / OpenAI Models
 
-**Author:** malioe · **Skill version:** 1.2.0 · **Version date:** 2026-10-03 · **License:** [MIT](LICENSE)
+**Author:** malioe · **Skill version:** 1.3.0 · **Version date:** 2026-10-07 · **License:** [MIT](LICENSE)
 
 A Codex skill for choosing suitable models, defining complete work packages, managing context, and accepting results while meeting the user's quality requirements. See the [English introduction](README.en.md) for usage examples and routing details. The skill instructions and reference files are written in English.
 
@@ -56,12 +56,13 @@ The skill allows automatic selection when a task matches its description. Explic
 
 ## Included defaults
 
-- Everyday implementation, review, ordinary debugging, and comparable writing, translation, or analysis: 6.1 Sol high / xhigh.
-- Cross-module work or sustained judgment: 6.1 Sol xhigh, after stabilizing shared contracts.
-- Simple batches with explicit rules: deterministic tools first; Luna max when a worker is needed.
-- Difficult reasoning, critical architecture, or data protection: Astra scoped to the concrete question, normally xhigh.
+- With Sol as main, default zero workers: simple, ordinary, and difficult coupled work stays direct; steps/files do not justify dispatch.
+- Worthwhile independent complete packages can use Sol workers, normally preserving verified Sol main effort; high is a reasoned exception.
+- Mechanical batches use tools/scripts; sufficient explicit-rule semantic batches can use Luna/max when independently verifiable with useful parallel main work.
+- Astra supplies a bounded read-only second opinion on a critical question. Automatic proposals use a 30-second notice window: unanswered execution needs prior authorization, questions/changes pause it, and a direct consultation request needs no duplicate approval. See [Astra consultation](quota-aware-agents/references/astra-consultation.md).
 - Existing 6 Sol workflows: prefer migration to 6.1 Sol, preserving task constraints and affected acceptance evidence.
-- Speed preference: Standard (normal speed), with reasoning effort treated separately. Do not enable, request, or recommend Fast / Ultrafast for this workflow. If the tool has no speed selector, do not infer its active mode or claim it was changed. A later explicit user instruction can revise the preference.
+- Worker speed follows the latest main selection, separately from reasoning effort. Refresh at dispatch, continuation, and observed switches; accept only current-version confirmations. A real control or speed-specific inheritance evidence is required to claim applied speed. See [speed following](quota-aware-agents/references/speed-following.md) for repeated switches and unavailable-tool limits.
+- Resolve the current main model only when routing needs it; preserve valid progress after a switch and use generic judgment when unknown. Reassess after completion, return coupled integration to direct work, and avoid standing review chains.
 
 The skill does not grant additional permissions or switch the main conversation's model or global settings. Model/effort support depends on the current tool and account. If 6.1 Sol is unavailable, use supported 6 Sol xhigh for a suitable package, or continue directly; other unavailable combinations require a suitable supported route or an explicit statement of the constraint. See [model routing](quota-aware-agents/references/model-routing.md) for the full rules.
 

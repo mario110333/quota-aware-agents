@@ -4,7 +4,7 @@
 
 A Codex skill for deciding when delegation is worth its total cost. Meet the user's quality requirements first, then compare direct work with a bounded worker package—including context, coordination, acceptance, and repair.
 
-**Author:** malioe · **Skill version:** 1.2.0 · **License:** [MIT](LICENSE) · **Speed preference:** Standard (normal speed)
+**Author:** malioe · **Skill version:** 1.3.0 · **License:** [MIT](LICENSE) · **Worker speed:** follows the current main selection
 
 [Install](#quickstart) · [Usage](#usage) · [Routing](#default-routing) · [FAQ](#faq)
 
@@ -67,10 +67,30 @@ The skill respects the request's scope and current permissions. Installing it do
 
 ## Workflow
 
-1. **Decide:** establish quality requirements, identify the current main model and adapt the strategy, then compare direct execution with framing, worker execution, acceptance, and expected repair.
-2. **Package:** resolve shared contracts, define a bounded result and acceptance criteria, and give each file or constrained resource one owner. Usually start with one worker.
+1. **Decide:** establish quality requirements and compare direct work with total delegation cost, including notification/waiting. Identify the current main model only when a remaining routing choice needs it.
+2. **Package:** only after the delegation test passes, resolve shared contracts, define a complete bounded result and acceptance criteria, and give each file or constrained resource one owner. Usually start with one worker then; a Sol main starts with zero.
 3. **Execute:** let the worker complete its package while the main agent advances useful parallel work. Pass material changes promptly and reassess when evidence changes.
 4. **Accept:** inspect the result and evidence against the original request, verify necessary integration boundaries, repair material defects, and stop when acceptance is satisfied.
+
+## What's new in 1.3.0
+
+- With Sol as main, start with zero workers and complete ordinary or difficult coupled work directly. Steps, files, and a main xhigh setting do not justify dispatch.
+- Delegate only a worthwhile complete independent package with useful necessary parallel main work. Include notice/waiting, acceptance, and repair in the tradeoff; avoid duplicate implementation and standing review chains.
+- Justified Sol workers normally preserve the verified Sol main effort when supported. Sol/high is an explicitly justified exception, not an automatic downgrade from xhigh.
+- Prefer scripts for mechanical batches; retain Luna/max for sufficiently large, explicit-rule, readily verifiable semantic batches. Keep hard coupled reasoning with the main agent.
+- Limit Astra to a concrete read-only second opinion. Automatic proposals use a delivered notice and a 30-second feedback window; unanswered execution requires prior explicit authorization, while questions/changes pause the plan. A direct consultation request needs no duplicate approval wait.
+- Preserve 1.2.1 speed following and versioned repeated-switch handling. Keep effort, speed, and consultation authorization separate; absent real host controls, do not promise running-worker hot updates.
+
+See [model routing](quota-aware-agents/references/model-routing.md) and [Astra consultation](quota-aware-agents/references/astra-consultation.md). These rules impose no hard spending cap and install no background timer or automation.
+
+## What's new in 1.2.1
+
+- Worker speed follows the main agent's current selection instead of a fixed Standard policy; speed, model, and reasoning effort remain independent.
+- Refresh before every dispatch, continuation, and settings operation; invalidate old confirmations when a switch is observed instead of caching speed for an entire turn.
+- Use versioned confirmations for repeated switches and late results, preserving valid package work without restarting workers on every toggle.
+- Distinguish real controls, spawn-only inheritance, running-worker updates, and unavailable/unverified synchronization. A task card or message cannot change execution speed.
+
+See [speed following](quota-aware-agents/references/speed-following.md). This skill installs no background watcher and cannot guarantee immediate changes to an executing worker request when the host provides no speed control.
 
 ## What's new in 1.2.0
 
@@ -79,14 +99,14 @@ The skill respects the request's scope and current permissions. Installing it do
 - Provides conditional guidance for shared runtime resources, observation validity, and evidence-based stopping or diagnosis changes.
 - Adds usage start times, multiple explicit roots, and source groups. Period totals and lifetime cumulative diagnostics remain distinct; unknown amounts are not zero.
 
-Complete packages, Sol high/xhigh starting points, Standard speed, deterministic tools, and stopping after acceptance remain in place. No fixed savings percentage is promised.
+Complete packages, deterministic tools, and stopping after acceptance remain in place. Fixed Standard from 1.2.0 was replaced by current-main speed following in 1.2.1; 1.3.0 also removes Sol/high as a default route. No fixed savings percentage is promised.
 
 ## Adapt to the main model
 
 | Current main model | Strategy |
 | --- | --- |
-| Astra | Keep consequential decisions with the main agent; suitable ordinary complete packages can use Sol when the main agent has useful parallel work. |
-| 6.1 Sol | Keep ordinary implementation, shared contracts, and integration direct; same-model workers need shorter context or useful parallel value to justify overhead. |
+| Astra | Keep consequential decisions with the main agent; worthwhile independent complete packages can use Sol/xhigh, with high only as a reasoned exception. |
+| 6.1 Sol | Default zero workers: keep ordinary implementation, hard coupled problems, and integration direct; delegate only worthwhile independent work with useful parallel progress. |
 | Old Sol, Luna, or another model | Use evidence about the exact model, supported tools, and task risk; do not classify every non-Astra model as Sol. |
 | Unknown or unmapped | Continue generic delegation judgment without guessing or blocking authorized work on routine confirmation. |
 
@@ -94,19 +114,22 @@ The skill guides the current agent to adapt when used. It reuses reliable metada
 
 ## Default routing
 
-Routing baseline: **2026-09-30**. These are starting points for suitable work, not guarantees of equivalent quality or availability.
+Routing baseline: **2026-10-07**. These are workflow choices, not guarantees of equivalent quality, savings, or availability.
 
 | Work | Starting point | Selection rule |
 | --- | --- | --- |
-| Everyday implementation, review, and ordinary debugging; comparable writing, translation, or analysis | `gpt-6.1-sol` / `high` or `xhigh` | Start with high for clear scope and straightforward acceptance; use xhigh for interacting constraints, ambiguity, or difficult semantic judgment. |
-| Cross-module implementation or sustained main-agent judgment | `gpt-6.1-sol` / `xhigh` | Stabilize shared contracts before dividing work. Main-agent routing is a recommendation, not permission to switch its model. |
-| Simple batch organization, extraction, or checks against explicit rules | Deterministic tools first; otherwise `gpt-6-luna` / `max` | Assign one bounded batch. Move to Sol when ambiguity or repair cost increases. |
-| Persistent reasoning difficulty, critical architecture, or data-protection judgment | `gpt-6-astra`, scoped to the concrete question; normally `xhigh` | Diagnose context, tool, and environment failures first; keep separable implementation with Sol. |
+| Simple work, ordinary implementation, or difficult coupled reasoning | Current main agent directly | Preserve user-selected main model and effort; do not manufacture a worker task. |
+| Worthwhile independent Sol complete package | Supported Sol; normally verified Sol main effort | Useful parallel main work is required. High is an explicitly justified reduction, not the automatic default from xhigh. |
+| Mechanical batches | Deterministic tools/scripts | Counting, hashes, references, and exact extraction do not need a worker. |
+| Sufficient explicit-rule, readily verifiable semantic batches | `gpt-6-luna` / `max` | One independent complete batch, with real parallel main work; prefer direct work if ambiguity or repair erases the benefit. |
+| Critical reasoning or decision needing a second opinion | `gpt-6-astra`, bounded read-only consultation; normally `xhigh` | Diagnose facts/tools/environment first; apply the notice and authorization rules rather than a standing review chain. |
 | Existing GPT-6 Sol workflows | Prefer migration to `gpt-6.1-sol` | Preserve task constraints and compare affected acceptance evidence; retain old Sol for availability or an observed regression. |
 
 Check the live worker tool's supported model/effort combinations. If 6.1 Sol is unavailable, use supported `gpt-6-sol` / `xhigh` for a suitable package, or continue directly. For other unavailable combinations, choose a supported suitable route or explain the constraint. Explicit user model choices prevail.
 
-**Standard (normal speed)** is the workflow's speed preference. Reasoning effort and speed mode are separate. Select Standard when the tool exposes a speed selector; when it does not, do not infer the active mode or claim it was changed. This workflow does not enable, request, or recommend Fast / Ultrafast or another paid acceleration mode. A later explicit user instruction can revise the preference.
+Worker speed follows the main agent's **current Standard / Fast / Ultrafast selection**, separately from model and reasoning effort. Refresh before each dispatch or continuation and reject stale confirmations after repeated switches. Use real controls or verified speed inheritance; messaging a worker does not change execution speed. If the active tool cannot set or verify speed, report that limit instead of claiming synchronization. See [speed following](quota-aware-agents/references/speed-following.md).
+
+The automatic Astra window starts after successful interactive delivery. Approval may release it early, refusal cancels, and questions/changes pause it. No prior authorization, failed delivery, or an ended task means no automatic dispatch. An old notice cannot authorize a new question; late cancellation stops subsequent consultation but cannot reverse consumed usage. Ordinary Sol/Luna packages do not acquire this window, and users can require explicit approval. See [Astra consultation](quota-aware-agents/references/astra-consultation.md).
 
 See [model routing](quota-aware-agents/references/model-routing.md) for full selection, fallback, calibration, and tool rules.
 
@@ -156,7 +179,9 @@ Internal telemetry changes or missing records can make results partial. Token co
 | --- | --- |
 | [INSTALL.en.md](INSTALL.en.md) | Installation, updates, removal, and troubleshooting |
 | [SKILL.md](quota-aware-agents/SKILL.md) | Core delegation and acceptance instructions |
-| [model-routing.md](quota-aware-agents/references/model-routing.md) | Model/effort routes, fallback, and calibration |
+| [model-routing.md](quota-aware-agents/references/model-routing.md) | Model/effort routes, the high exception, fallback, and calibration |
+| [astra-consultation.md](quota-aware-agents/references/astra-consultation.md) | Bounded second opinions, 30-second notice, authorization, and cancellation |
+| [speed-following.md](quota-aware-agents/references/speed-following.md) | Fresh speed resolution, repeated switches, current confirmations, and host-tool limits |
 | [execution-evidence.md](quota-aware-agents/references/execution-evidence.md) | Shared runtime resources, observation validity, and stopping criteria |
 | [cost-model.md](quota-aware-agents/references/cost-model.md) | Cost accounting and limits of usage evidence |
 | [openai.yaml](quota-aware-agents/agents/openai.yaml) | Skill UI metadata and invocation policy |
