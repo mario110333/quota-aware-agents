@@ -2,7 +2,7 @@
 
 [简体中文](README.md) · **English**
 
-I wrote this Codex skill to help agents decide when delegation is worthwhile, then choose an appropriate model and reasoning effort. Simple work stays direct; complex work is organized around clear boundaries. Delegation must account for context, coordination, waiting, acceptance, and repair.
+A delegation skill for Codex that first assesses whether delegation is worthwhile, then selects an appropriate model and reasoning effort. Simple work stays direct; complex work is organized around clear boundaries. Delegation must account for context, coordination, waiting, acceptance, and repair.
 
 **Author: malioe** · **Current version: 1.3.0** · **License: [MIT](LICENSE)**
 
@@ -66,7 +66,7 @@ When shared interfaces are unsettled, complete and verify a representative end-t
 
 Astra provides a second opinion on a specific critical question. The task owner handles implementation and acceptance; consultation does not automatically expand into ongoing supervision or execution.
 
-For an automatic proposal, deliver an interactive notice describing the question, scope, and model, then allow **30 seconds for feedback**. Proceed after silence only if the user has previously explicitly authorized that default. Approval can release the plan early, refusal cancels it, and questions or adjustments pause it. A new scope needs a new notice. A direct request for that bounded consultation needs no duplicate wait. See the [Astra consultation rules](quota-aware-agents/references/astra-consultation.md) for authorization, cancellation, and late replies.
+For an automatic proposal, deliver an interactive notice describing the question, scope, and model, then allow **30 seconds for feedback**. Proceed after silence only if you have previously explicitly authorized that default. Approval can release the plan early, refusal cancels it, and questions or adjustments pause it. A new scope needs a new notice. A direct request for that bounded consultation needs no duplicate wait. See the [Astra consultation rules](quota-aware-agents/references/astra-consultation.md) for authorization, cancellation, and late replies.
 
 ### Following the main agent's speed
 
@@ -76,11 +76,11 @@ Actual synchronization requires host speed controls or verified inheritance. Ins
 
 ## FAQ
 
-**Do I need workers when my main agent is already Sol/xhigh?**
+**Does a Sol/xhigh main agent need workers?**
 
 Usually, direct work is sufficient. Delegate only when an independent package and necessary parallel work can outweigh handoff, waiting, acceptance, and repair. A main xhigh setting does not automatically warrant a Sol/high worker.
 
-**Will it change my main model, global settings, or permissions?**
+**Will it change the main model, global settings, or permissions?**
 
 No. Installation and use grant no additional model access, file mutations, external actions, or recursive delegation. Automatic Astra consultation also follows the authorization conditions above.
 
@@ -109,6 +109,6 @@ The skill instructions do not require Node.js. The optional [model resolver](quo
 
 ## Feedback and license
 
-Tell me about reproducible problems or propose evidence-backed routing improvements through [GitHub Issues](https://github.com/mario110333/quota-aware-agents/issues). Include expected behavior, actual results, and necessary reproduction steps. Remove private paths, conversation identifiers, credentials, and chat content before posting.
+Report reproducible problems or propose evidence-backed routing improvements through [GitHub Issues](https://github.com/mario110333/quota-aware-agents/issues). Include expected behavior, actual results, and necessary reproduction steps. Remove private paths, conversation identifiers, credentials, and chat content before posting.
 
-I release this project under the [MIT License](LICENSE). The standalone skill folder includes the same license. Copyright (c) 2026 malioe.
+Released under the [MIT License](LICENSE). The standalone skill folder includes the same license. Copyright (c) 2026 malioe.
