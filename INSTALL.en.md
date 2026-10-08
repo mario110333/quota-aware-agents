@@ -99,6 +99,18 @@ The package contains the reusable skill, installation script, documentation, lic
 
 ## Update or uninstall
 
-Before updating, back up the installed `quota-aware-agents` folder outside skill search directories, then move it out and install the new version. Do not merge files from different versions.
+### One request to Codex
 
-To uninstall a manually installed copy or one installed by `Install.ps1`, remove only its `quota-aware-agents` folder from `.agents/skills/`. If you used `skill-installer`, locate the directory it reported before removing that copy. Other skills, model settings, and project files do not need changes. Restart Codex if discovery has not refreshed.
+```text
+Please update my installed quota-aware-agents from https://github.com/mario110333/quota-aware-agents to the latest main version: locate the actual installation, back it up outside skill search directories, preserve local customizations and directory links, verify the complete package, update the original location, and report the version; skip reinstalling if it is already current.
+```
+
+### Update flow
+
+1. Locate the actual installation and its source. It may be in `.agents/skills/`, `.codex/skills/`, or a project directory. Keep that location; check duplicate copies and the real target of symlinks or Junctions. An update does not require changing the main model or global settings.
+2. Pin repository `main` to one commit and download the complete repository at that commit into a temporary directory outside skill search locations. Verify the complete file manifest and SHA-256 values with that commit's `checksums.json`, then compare the installed version and complete files. If both match, report that it is current and stop. Also skip deployment when local customizations match the previous preservation record and upstream skill files have not changed; customized hashes differing from the original package do not by themselves mean the installation is outdated.
+3. Back up the entire existing installation outside skill search directories and verify the backup. Merge local customizations using the original upstream baseline and the new version, preserving explicit preferences; ask only when an actual conflict cannot be resolved. Distinguish the verified upstream package from a locally adapted result: upstream hashes cannot establish that customized files are identical.
+4. Prepare and check the complete replacement in the temporary directory before deployment. `skill-installer` and `Install.ps1` reject existing destinations, so use them for a temporary installation check first rather than repeatedly targeting the installed copy. Replace an ordinary directory after backup; preserve a linked installation and update its verified real target. Remove obsolete upstream package files only according to the old manifest, preserving files of unknown local origin. Restore the verified backup if deployment fails.
+5. Verify the deployed complete files, or the merged result when customized. Report the version, upstream commit, installation path, backup path, and retained customizations. Use the updated skill on the next turn; if it does not appear, restart Codex as described in the [official documentation](https://learn.chatgpt.com/docs/build-skills). An update need not interrupt other work by restarting the app automatically.
+
+Manual updates follow the same backup, package verification, and original-location replacement process. To uninstall, remove only the located skill directory or link; preserve a link's real target unless its removal is also explicitly requested. Other skills, model settings, and project files remain unchanged. Restart Codex if discovery has not refreshed.
