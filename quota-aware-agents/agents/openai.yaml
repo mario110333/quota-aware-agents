@@ -1,6 +1,6 @@
 interface:
-  display_name: "Codex / OpenAI Cost-Aware Delegation"
-  short_description: "Model-adaptive, cost-aware delegation in Codex"
-  default_prompt: "Use $quota-aware-agents to decide whether substantial work benefits from delegation, assign only worthwhile complete packages, and follow the latest main speed through supported controls while preserving quality."
+  display_name: "Codex / OpenAI Effective Delegation"
+  short_description: "Improve task quality, completion time and resource use"
+  default_prompt: "Use $quota-aware-agents to choose direct work, tools or bounded delegation for quality, total completion time and resource use, following latest main speed through supported controls."
 policy:
   allow_implicit_invocation: true

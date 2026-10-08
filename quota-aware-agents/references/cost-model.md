@@ -25,11 +25,15 @@ Codex Standard, credits per million tokens:
 
 Source: [Codex pricing](https://learn.chatgpt.com/docs/pricing). The tables are Standard-rate reference scenarios; worker speed follows the current main selection under [speed following](speed-following.md). For current or historical accelerated usage, consult the applicable official rates and distinguish purchased credits from included usage; never apply Standard silently to an unknown or different tier. A selected or requested mode does not establish the applied tier of every worker/request. Tokens, API-equivalent dollars, credit equivalents, actual charges, and subscription usage percentages are separate measures. Do not derive task subscription consumption from API prices or account-wide balance changes.
 
+Historical rate rows do not authorize legacy-worker routing. Model selection follows [model routing](model-routing.md).
+
 ## Calculate without double counting
 
 `cost = sum(tokens in each mutually exclusive billing category × its applicable rate) / 1,000,000 + separate tool fees`
 
 Cached input is generally included in input, and reasoning output in output: do not add either twice. Resolve cache-write semantics before pricing records with writes. Include all relevant parent and worker requests, coordination, acceptance, and observed retries once. Report missing model, tier, cache, tool fees, or telemetry as limits rather than zero. For a forecast, include expected repair; for measured use, count actual repair only.
+
+Compare comparable task outcomes: original acceptance and material defects/repair, elapsed time from start through acceptance (including waiting/integration), and total parent/worker resource use. These are separate measures, not a mandatory weighted score or reporting ritual; no comparable direct alternative means savings/speedup remain unmeasured.
 
 Compare total delegated cost with the direct alternative under the same quality requirement. Parent reimplementation, duplicate checks, and long repeated context can erase worker savings. Fixed-token repricing changes prices only, not success, token volume, caching, or retries; label it hypothetical and never present its percentage as measured savings or a next-task budget promise. Benchmark cost per task is neither project cost nor cost per successful outcome. Define wall-time boundaries and how parallel work is counted before claiming speedups.
 

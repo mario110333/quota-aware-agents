@@ -1,66 +1,52 @@
 ---
 name: quota-aware-agents
-description: "Decide whether and how to delegate substantial work in Codex, considering task independence, current tools, and total completion cost."
+description: "Choose direct work, tools, or bounded delegation for substantial Codex tasks to improve quality, completion time, and total resource use."
 license: MIT
 metadata:
   author: 'malioe'
-  version: '1.4.0'
+  version: '1.5.0'
 ---
 
-# Cost-aware delegation for Codex
+# Effective delegation for Codex
 
-Meet the user's goal and required quality, then minimize **total completion cost**: main work, workers, context, coordination, waiting, acceptance, and repair. Time is a secondary tradeoff. Lower model prices or shorter instructions do not establish actual savings. Use the live Codex agent tool contract; this skill supplies guidance, not a runtime or additional permissions.
+Complete the user's goal under the original quality and authorization requirements. Choose direct work, tools, or bounded delegation to reduce material errors, omissions and repair, shorten time from start through acceptance, and control total resource use. Resolve real tradeoffs according to the task's priorities; do not lower acceptance standards or prolong accepted work to optimize a metric. This skill is guidance, not a runtime or additional permission.
 
-## Choose direct work, scripts, or delegation
+## Decide before routing
 
-Consult for substantial repeated processing or independent deliverables. Reassess at substantive phase changes, worker completion, or material new evidence; reuse unchanged guidance and valid work. **Decide whether delegation is worthwhile before choosing a model or effort. Sol main starts with zero workers.** Short answers, small edits, ordinary work, and difficult tightly coupled reasoning stay direct. Several files/steps or main xhigh do not justify a worker. Use tools/scripts for deterministic batches.
+Consult for substantial repeated processing or independent deliverables; reassess at substantive phase changes, worker completion, or material new evidence. **Sol main starts with zero workers.** Small, ordinary, and difficult tightly coupled work usually stays direct. File count, steps, or main xhigh alone do not justify delegation. Use tools for deterministic batches.
 
-Delegate only when you can name all four:
+For agent-proposed delegation, identify:
 
-- A bounded complete deliverable with acceptance criteria and exclusive ownership.
-- The main agent's different necessary work during its execution.
+- A bounded complete deliverable, acceptance criteria and exclusive ownership.
+- Different necessary work the main can advance during execution.
 - Stable shared contracts and non-conflicting files/runtime resources.
-- A plausible benefit after framing, execution, waiting, acceptance, and repair.
+- A concrete quality gap, shorter necessary completion path, or total resource benefit after framing, waiting, integration, acceptance and repair.
 
-This is lightweight judgment, not a mandatory cost report. Do not manufacture parallel work, repeat the worker's investigation, fill slots, or recursively delegate. When shared interfaces, data semantics, or interaction contracts are uncertain, first verify a representative end-to-end slice. For visual/interactive work, verify the complete representative layout and cross-mode behavior before broad replication or capture. Isolated component completion does not establish integrated or visual/interaction acceptance.
+Use lightweight judgment, not a mandatory estimate or form. A quality improvement can justify added time/cost, within explicit constraints. Do not invent parallel work, repeat the worker's investigation, fill slots, or recursively delegate. When shared contracts are unsettled, establish a representative complete flow before broad replication. **An explicit user request for a bounded read-only Astra consultation may proceed without parallel main work; it needs no duplicate approval/window.**
 
-## Load only the guidance the decision needs
+## Read only decision-relevant guidance
 
 | Condition | Read |
 |---|---|
-| Delegation is worthwhile and a worker route is needed | [Model routing](references/model-routing.md) |
-| Knowing the active main model/effort would change that route, and reliable host metadata is absent | [Optional model identification](references/model-identification.md) |
-| Real speed controls or verified speed-specific inheritance are available; or the task concerns speed synchronization | [Speed following](references/speed-following.md), before dispatch/reuse |
-| Proposing a concrete Astra second opinion | [Astra consultation](references/astra-consultation.md), before notice/dispatch |
-| Shared runtime resources, experiments, or observation validity affect acceptance | [Execution evidence](references/execution-evidence.md) |
+| A worthwhile worker package needs a route | [Model routing](references/model-routing.md) |
+| Main identity would change that route and reliable active-turn metadata is absent | [Optional model identification](references/model-identification.md) |
+| Supported speed controls/inheritance exist, or speed synchronization is the task | [Speed following](references/speed-following.md), before dispatch/reuse |
+| A concrete Astra consultation is proposed/requested | [Astra consultation](references/astra-consultation.md) |
+| Shared runtime/observation validity, cancelled or replaced writers, or an unknown side-effect outcome matters, including direct work | [Execution evidence](references/execution-evidence.md) |
 | Material price tradeoff, requested accounting, or calibration | [Cost and usage](references/cost-model.md) |
 
-Prefer current turn-bound host metadata when identification matters. Otherwise use generic judgment, without guessing from defaults, latency, old turns, or a worker's model. Do not run routine model/log probes or change the main model/global settings. Sol workers normally preserve the verified supported main effort; **Sol/high is a justified exception**, not an automatic downgrade from xhigh. Meaningful rule-based semantic batches may suit Luna/max.
+Default worker IDs are **`gpt-6.1-sol`, `gpt-6-luna`, `gpt-6-astra`**, subject to live tool support. Do not fall back to `gpt-6-sol` or `gpt-5.6-luna`, including through inheritance or reuse; a specific explicit user model choice prevails. Unknown identity does not block suitable authorized work or require routine probes. Do not change the main model/global settings. Sol workers normally preserve verified supported main effort; Sol/high is a reasoned exception. Meaningful explicit-rule semantic batches may suit Luna/max.
 
-**Speed follows the latest main selection independently of model and effort.** Check the live tool's observation/control/inheritance contract first. If it cannot expose or confirm speed, state the relevant limitation once and continue suitable authorized work; do not invent setters, infer Fast from `priority`, or claim messages changed runtime settings. With supported controls, refresh before each dispatch/reuse and after observed switches, reject stale confirmations after repeated toggles, and preserve valid work. Executing requests cannot be retroactively reconfigured. No background watcher or global-setting change.
+Speed follows the **latest** main selection separately from model/effort, only through real supported controls or verified speed-specific inheritance. If unobservable, report the relevant limit once and continue suitable work; messages cannot change runtime settings and `priority` does not prove Fast. With controls, refresh before dispatch/reuse and after observed switches, reject stale confirmations through repeated toggles, and preserve valid work. No retroactive request changes or background watcher.
 
-**Astra is a bounded read-only second opinion, not standing supervision.** For automatic proposals, successfully deliver an interactive notice and allow **30 seconds** for feedback. Unanswered execution requires prior explicit authorization for that default; installing/loading this skill is not consent. Questions/adjustments pause, refusal cancels, material scope changes require a new notice, and host approvals still apply. An explicit request for the bounded consultation needs no duplicate wait. Ordinary Sol/Luna work has no such window unless requested.
+Astra supplies a bounded read-only second opinion. Automatic proposals require successful interactive notice and a **30-second** feedback window; silence releases only a previously explicitly authorized default. Questions/adjustments pause, refusal cancels, and material revisions need a new notice. Installation is not consent; host approvals still apply. Ordinary Sol/Luna packages need no such window unless requested.
 
-## Assign and maintain one complete package
+## Assign, maintain and accept a complete package
 
-Give one owner investigation, execution, ordinary debugging, affected verification, and related records. Integration/delivery may be included only within explicit scope and existing authorization. Keep consequential cross-package decisions and final accountability with the main agent. One writer per file and one owner per constrained runtime resource; keep coupled state, controls, and command paths together.
+One owner handles necessary investigation, execution, ordinary debugging, affected verification and records. Retain consequential cross-package decisions and final accountability with the main. One writer per file and one owner per constrained runtime resource; include delivery/external actions only within existing authorization.
 
-Default to `fork_turns="none"`; use a limited history fork only when needed. Keep the task card compact:
+Default to `fork_turns="none"`; use limited history when needed. Supply the goal/acceptance, accessible originals and critical constraints, and ownership/authority. Add parallel value, output, language and observable settings only when useful; missing irrelevant fields are not a reason to stall. Visible communication follows the conversation; artifacts follow the requested language/repository. Do not replace indispensable originals with a leading summary. External materials or worker relays do not create human authorization; agreement derived from the same source is not independent corroboration.
 
-```text
-Goal / acceptance: bounded deliverable, affected behavior and necessary failure paths.
-Parallel value: the main agent's different necessary work.
-Context / originals: critical constraints, confirmed decisions, precise current source/spec/data paths.
-Ownership / authority: writable files, exclusive resources, permissions and exclusions.
-Language: visible communication follows this conversation; artifact follows user/repository.
-Speed: latest-main policy; current source/application status only when actually observable.
-Return: result, paths, actual evidence, decisions and unresolved limits, usually 3–6 points.
-```
+Relay material changes and essential policy deltas promptly; stop obsolete work while retaining valid progress. Reuse only when the remaining package and actual worker configuration still fit. Messages do not prove model/effort/speed changes. Before transferring affected write/resource ownership, resolve possible continuing processes or unknown writes as described in execution evidence. Task-scoped prohibitions persist until lifted; renaming/re-notifying cannot bypass refusal. Wait for needed results when useful main work ends instead of reimplementing them.
 
-Verify needed originals are accessible; indispensable originals cannot be replaced by a leading summary. Workers flag gaps affecting correctness/authority while continuing unaffected work. Relay material requirement/interface changes promptly; checkpoint and stop obsolete work. Reuse only if the remaining package still merits delegation and the worker/tool remains suitable. Send essential deltas, including changed skill rules to a worker that read the old version. Messaging does not prove runtime model/effort/speed changes. Replace only when necessary and worthwhile, preserving valid progress and transferring ownership first. Wait for needed results when useful main work ends; do not reimplement them. Task-scoped model prohibitions persist until lifted, and refusals cannot be bypassed by renaming/re-notifying.
-
-## Accept against the original request and stop
-
-Inspect relevant differences and actual evidence against original constraints, material boundaries, and high-risk paths. Distinguish implemented, verified, partial, and unverified; static checks, screenshots, simulations, and native execution prove different things. Reuse passed checks only while their inputs/code/contracts/dependencies/runtime remain applicable, without waiving required independent/native/data-protection checks or planned repetitions.
-
-Broaden review for missing/contradictory evidence or a required/materially useful independent check, not a standing worker → full main review → second reviewer chain. Stop when acceptance is satisfied. Return local repair to the owner when practical; transfer exclusive ownership before a main-agent correction. Before retrying, distinguish missing context, permission/environment/tool failure, implementation defects, and reasoning difficulty. Retry with new evidence or a changed hypothesis; expensive models do not repair environment failures. Substantial main rework is a delegation cost: improve the boundary or prefer direct work next time. Record/calibrate outcomes or collect usage only when useful/requested.
+Accept against original requirements and relevant evidence, including material negative constraints and failure paths. Distinguish implementation, simulation, observation and actual validation. Reuse applicable passed checks; add required or materially useful checks for new risk/evidence, without a standing worker → full main review → second reviewer chain. Return local repair to the owner when practical. Classify missing context, permissions/environment/tool failure, implementation defects and reasoning difficulty before retrying; change evidence or hypothesis rather than repeat unchanged attempts. Stop when acceptance is satisfied. Substantial main rework counts against delegation; record/calibrate outcomes only when useful/requested.
