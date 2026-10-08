@@ -1,20 +1,16 @@
 {
   "name": "quota-aware-agents",
   "author": "malioe",
-  "version": "1.3.0",
-  "version_date": "2026-10-07",
+  "version": "1.4.0",
+  "version_date": "2026-10-08",
   "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "CDCB373D2CA4EB99CA4282DD28BA5DE2EA0223CCD5DBFF22D436910813462B7A"
+    },
     {
       "path": "LICENSE",
       "sha256": "8C99E8286780C80F9A0FAFE30D6848BBE7692FBA7EFB511FEED6D0CE5CB65B1F"
-    },
-    {
-      "path": "SKILL.md",
-      "sha256": "13B6FA965A72F290E58D2860E5F0BF663E98BA1F140611FBE391ACC539FCEE7F"
-    },
-    {
-      "path": "agents/openai.yaml",
-      "sha256": "F0692454405833A3D9987D027277B7FD73AA5D0F0D625F842F74BE302167E747"
     },
     {
       "path": "references/astra-consultation.md",
@@ -29,12 +25,16 @@
       "sha256": "CA435F6189F5F05CE68A5F4C3226C70E08D30D4D88ACC5B001F079A46B53F054"
     },
     {
+      "path": "references/model-identification.md",
+      "sha256": "92D08DB0ADFB98D3FDD0BDD37C3D383B223A7D935559C50909DD331675AFD15B"
+    },
+    {
       "path": "references/model-routing.md",
-      "sha256": "4ECAB0D329BCB69E8507713D7EA02BC04D7085FAB0CC663A7FFD898CAA2592CD"
+      "sha256": "C8ED70180C6D4FA53F5013E3C55FFFFF52C82D7214A21C67F9366BD88F14CAC0"
     },
     {
       "path": "references/speed-following.md",
-      "sha256": "231E80098B8467B82FCFF2F860F20B059FA5D24562E4FEA36F18492691E09A91"
+      "sha256": "DDCE423A176DD353ADD12218C28BD76DA690D8A5060A02BA01119C9BF51B0BC9"
     },
     {
       "path": "scripts/resolve-main-model.mjs",
@@ -47,6 +47,10 @@
     {
       "path": "scripts/telemetry-utils.mjs",
       "sha256": "7DBCFCB8F298CCB2D5A1D567E95A849409405CA5A83CB9664AF4655C327BDA14"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "846B34BFD0EE3827EA2B41DC589CD204E6A08B2F326A3A819915ED3D05501CEF"
     }
   ]
 }

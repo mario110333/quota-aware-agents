@@ -4,7 +4,7 @@
 
 A delegation skill for Codex that first assesses whether delegation is worthwhile, then selects an appropriate model and reasoning effort. Simple work stays direct; complex work is organized around clear boundaries. Delegation must account for context, coordination, waiting, acceptance, and repair.
 
-**Author: malioe** · **Current version: 1.3.0** · **License: [MIT](LICENSE)**
+**Author: malioe** · **Current version: 1.4.0** · **License: [MIT](LICENSE)**
 
 [Install and first use](#install-and-first-use) · [Examples](#examples) · [Delegation rules](#delegation-rules) · [FAQ](#faq) · [Detailed documentation](#detailed-documentation)
 
@@ -25,7 +25,11 @@ You can also install manually:
 - **Windows:** download the [main-branch ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies the complete skill manifest against [checksums.json](checksums.json), requires no administrator rights, and stops if the destination already exists.
 - **Windows / macOS / Linux:** copy the entire `quota-aware-agents` folder into `~/.agents/skills/`. Before updating, back up the old copy and move it outside skill search directories.
 
-See the [installation guide](INSTALL.en.md) for commands, updates, removal, and troubleshooting. Get the current 1.3.0 version from main; [Releases](https://github.com/mario110333/quota-aware-agents/releases) contains historical versions. Installing the skill does not expand authorization for files, tools, or external actions.
+See the [installation guide](INSTALL.en.md) for commands, updates, removal, and troubleshooting. Get the current 1.4.0 version from main; [Releases](https://github.com/mario110333/quota-aware-agents/releases) contains historical versions. Installing the skill does not expand authorization for files, tools, or external actions.
+
+## Changes in 1.4.0
+
+The entrypoint keeps core delegation, handoff, and acceptance rules; model identification, speed synchronization, and usage accounting load only when needed. Missing speed controls produce an explicit limitation and suitable continued work, avoiding ineffective probes. Latest-setting confirmation after repeated switches, the Sol/high exception, and the Astra 30-second authorization policy remain.
 
 ## Examples
 
@@ -100,6 +104,7 @@ Yes. Both READMEs describe the same rules; the skill and reference files are wri
 
 - [SKILL.md](quota-aware-agents/SKILL.md): core workflow, task cards, and acceptance.
 - [Model routing](quota-aware-agents/references/model-routing.md): models, reasoning effort, the Sol/high exception, and unavailable routes.
+- [Optional model identification](quota-aware-agents/references/model-identification.md): session binding, the helper, and unknown fallback.
 - [Astra consultation](quota-aware-agents/references/astra-consultation.md): notice windows, authorization, scope changes, and cancellation.
 - [Speed following](quota-aware-agents/references/speed-following.md): fresh settings, repeated switches, and host capability limits.
 - [Execution evidence](quota-aware-agents/references/execution-evidence.md): shared runtime resources, observation validity, and stopping criteria.

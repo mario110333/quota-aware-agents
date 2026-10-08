@@ -4,7 +4,7 @@
 
 面向 Codex 的按需分工 Skill：先判断任务是否值得交给子代理，再选择合适的模型和推理强度。简单工作直接完成，复杂工作按边界处理；分工要计入上下文、协调、等待、验收和返工的总成本。
 
-**作者：malioe** · **当前版本：1.3.0** · **许可证：[MIT](LICENSE)**
+**作者：malioe** · **当前版本：1.4.0** · **许可证：[MIT](LICENSE)**
 
 [安装与首次使用](#安装与首次使用) · [使用示例](#使用示例) · [分工规则](#分工规则) · [常见问题](#常见问题) · [详细文档](#详细文档)
 
@@ -25,7 +25,11 @@
 - **Windows：**下载 [main 分支 ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip)，解压后在仓库根目录运行 `./Install.ps1`。脚本核对完整 Skill 文件清单与 [checksums.json](checksums.json)，无需管理员权限；目标目录已存在时会停止。
 - **Windows / macOS / Linux：**将完整的 `quota-aware-agents` 文件夹复制到 `~/.agents/skills/`。更新前，将旧副本备份并移出 Skill 搜索目录。
 
-具体命令、更新、卸载和排查步骤见[安装说明](安装说明.md)。当前 1.3.0 从 main 分支获取；[Releases](https://github.com/mario110333/quota-aware-agents/releases) 保留历史版本。安装 Skill 不会扩大文件、工具或外部操作的授权范围。
+具体命令、更新、卸载和排查步骤见[安装说明](安装说明.md)。当前 1.4.0 从 main 分支获取；[Releases](https://github.com/mario110333/quota-aware-agents/releases) 保留历史版本。安装 Skill 不会扩大文件、工具或外部操作的授权范围。
+
+## 1.4.0 调整
+
+入口只保留分工判断、交接和验收的核心规则；模型识别、速度协议及用量核算按需要读取。缺少速度控制接口时明确限制并继续合适的工作，避免无效探测；保留反复切换时的最新设置确认、Sol/high 例外和 Astra 30 秒授权约定。
 
 ## 使用示例
 
@@ -100,6 +104,7 @@ Astra 用于具体关键问题的第二意见。实现与验收由任务负责�
 
 - [SKILL.md](quota-aware-agents/SKILL.md)：核心工作流程、任务卡和验收。
 - [模型路由](quota-aware-agents/references/model-routing.md)：模型与推理强度、Sol/high 例外及不可用时的处理。
+- [可选模型识别](quota-aware-agents/references/model-identification.md)：需要识别时的绑定、脚本与未知回退。
 - [Astra 咨询](quota-aware-agents/references/astra-consultation.md)：通知窗口、授权、范围调整和取消。
 - [速度跟随](quota-aware-agents/references/speed-following.md)：当前设置刷新、反复切换和宿主能力限制。
 - [执行证据](quota-aware-agents/references/execution-evidence.md)：共享运行资源、观察有效性和停止条件。

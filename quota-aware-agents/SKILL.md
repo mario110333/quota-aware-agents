@@ -1,66 +1,66 @@
 ---
 name: quota-aware-agents
-description: "Plan cost-aware delegation in Codex using OpenAI models for substantial implementation, translation, analysis, or batch review. Adapt to the verified current main model and reassess at phase changes; handle short answers and small edits directly."
+description: "Decide whether and how to delegate substantial work in Codex, considering task independence, current tools, and total completion cost."
 license: MIT
 metadata:
   author: 'malioe'
-  version: '1.3.0'
+  version: '1.4.0'
 ---
 
-# Cost-aware agent delegation for Codex / OpenAI models
+# Cost-aware delegation for Codex
 
-Designed for Codex with OpenAI models and the live agent tools available in that session. Other OpenAI-model environments require adaptation of tool contracts, permissions, model availability, and usage collection; these instructions do not provide a standalone agent runtime.
+Meet the user's goal and required quality, then minimize **total completion cost**: main work, workers, context, coordination, waiting, acceptance, and repair. Time is a secondary tradeoff. Lower model prices or shorter instructions do not establish actual savings. Use the live Codex agent tool contract; this skill supplies guidance, not a runtime or additional permissions.
 
-Meet the user's goal and required quality, then minimize **total completion cost**: main-agent work, workers, context, coordination, verification, and repair. Elapsed time is a secondary tradeoff. Delegation itself is not success, and lower token prices do not prove task savings.
+## Choose direct work, scripts, or delegation
 
-**Worker speed follows the main agent's current speed selection.** Keep speed (Standard / Fast / Ultrafast), model, and reasoning effort independent. Refresh speed before each spawn, continuation, or configuration update and immediately when a main-speed change is observed; do not reuse a turn-wide speed snapshot. Preserve valid work when the main agent switches back and forth. Read [speed following](references/speed-following.md) before dispatch or reuse: it defines freshness, versioned confirmations, existing-worker handling, and unsupported-tool limits. Use only real host controls or verified inheritance. Instructions and notifications cannot set execution speed; unknown or unverified synchronization must remain explicit. Do not change the main selection or global configuration.
+Consult for substantial repeated processing or independent deliverables. Reassess at substantive phase changes, worker completion, or material new evidence; reuse unchanged guidance and valid work. **Decide whether delegation is worthwhile before choosing a model or effort. Sol main starts with zero workers.** Short answers, small edits, ordinary work, and difficult tightly coupled reasoning stay direct. Several files/steps or main xhigh do not justify a worker. Use tools/scripts for deterministic batches.
 
-## Decide whether to delegate
+Delegate only when you can name all four:
 
-Consult before substantial repeated processing or independently deliverable work. Reassess at phase changes, worker completion, or material new evidence. **Decide whether delegation is worthwhile before selecting a worker model or effort. With Sol as main, start with zero workers and complete ordinary work directly.** Multiple steps or files, a main xhigh setting, or consulting this skill are not dispatch reasons. Keep simple work direct, deterministic batches with tools/scripts, and difficult tightly coupled reasoning under one owner.
+- A bounded complete deliverable with acceptance criteria and exclusive ownership.
+- The main agent's different necessary work during its execution.
+- Stable shared contracts and non-conflicting files/runtime resources.
+- A plausible benefit after framing, execution, waiting, acceptance, and repair.
 
-Delegate only a bounded complete package with acceptance criteria, exclusive ownership, and useful parallel work for the main agent. Be able to name the worker's deliverable, the main agent's different necessary deliverable, shared boundaries/resources, and why framing + worker execution + notification/waiting + acceptance + expected repair improves total completion cost. This is a lightweight judgment, not a mandatory cost report. Shorter context or a lower effort setting alone does not establish savings. Do not manufacture parallel work or duplicate the worker's investigation/implementation. Starting one worker is a concurrency suggestion only after this test passes; add another only for a genuinely independent work line within the current tool limit. Do not split a coherent package to fill slots or recursively delegate.
+This is lightweight judgment, not a mandatory cost report. Do not manufacture parallel work, repeat the worker's investigation, fill slots, or recursively delegate. When shared interfaces, data semantics, or interaction contracts are uncertain, first verify a representative end-to-end slice. For visual/interactive work, verify the complete representative layout and cross-mode behavior before broad replication or capture. Isolated component completion does not establish integrated or visual/interaction acceptance.
 
-Different files do not ensure independence. Resolve shared interfaces, data semantics, and interaction contracts first. When those are uncertain, complete and verify a representative end-to-end slice before parallel replication. A component's completion does not establish acceptance of the integrated result. For visual or interactive work, verify the complete representative layout and cross-mode behavior before broad replication or capture; passing isolated component checks is not a substitute.
+## Load only the guidance the decision needs
 
-Only after delegation passes this test, read [model routing](references/model-routing.md) for the worker route. Read [Astra consultation](references/astra-consultation.md) when proposing that specific second opinion: automatic proposals use a successfully delivered notice and a **30-second feedback window**, with default execution only under prior explicit authorization. An explicit request for the bounded consultation already authorizes it and needs no duplicate permission wait. Ordinary Sol/Luna packages do not acquire this window unless the user requests it.
+| Condition | Read |
+|---|---|
+| Delegation is worthwhile and a worker route is needed | [Model routing](references/model-routing.md) |
+| Knowing the active main model/effort would change that route, and reliable host metadata is absent | [Optional model identification](references/model-identification.md) |
+| Real speed controls or verified speed-specific inheritance are available; or the task concerns speed synchronization | [Speed following](references/speed-following.md), before dispatch/reuse |
+| Proposing a concrete Astra second opinion | [Astra consultation](references/astra-consultation.md), before notice/dispatch |
+| Shared runtime resources, experiments, or observation validity affect acceptance | [Execution evidence](references/execution-evidence.md) |
+| Material price tradeoff, requested accounting, or calibration | [Cost and usage](references/cost-model.md) |
 
-Read [execution evidence](references/execution-evidence.md) only when shared runtime resources, experiments, or observation validity matter, and [cost and usage](references/cost-model.md) only for a material price tradeoff, requested accounting, or calibration. Reuse unchanged guidance. Do not add model probes, long task cards, usage audits, or extra reviews to simple direct work. Current tool contracts, permissions, and user choices prevail.
+Prefer current turn-bound host metadata when identification matters. Otherwise use generic judgment, without guessing from defaults, latency, old turns, or a worker's model. Do not run routine model/log probes or change the main model/global settings. Sol workers normally preserve the verified supported main effort; **Sol/high is a justified exception**, not an automatic downgrade from xhigh. Meaningful rule-based semantic batches may suit Luna/max.
 
-## Resolve the current main model when routing needs it
+**Speed follows the latest main selection independently of model and effort.** Check the live tool's observation/control/inheritance contract first. If it cannot expose or confirm speed, state the relevant limitation once and continue suitable authorized work; do not invent setters, infer Fast from `priority`, or claim messages changed runtime settings. With supported controls, refresh before each dispatch/reuse and after observed switches, reject stale confirmations after repeated toggles, and preserve valid work. Executing requests cannot be retroactively reconfigured. No background watcher or global-setting change.
 
-Prefer reliable host metadata bound to this conversation and active turn; use the optional read-only [model resolver](scripts/resolve-main-model.mjs) only when identification would affect a remaining routing choice and the adapter is supported. See [model routing](references/model-routing.md) for binding and fallback rules. A worker's own model is not evidence of the main conversation's model.
+**Astra is a bounded read-only second opinion, not standing supervision.** For automatic proposals, successfully deliver an interactive notice and allow **30 seconds** for feedback. Unanswered execution requires prior explicit authorization for that default; installing/loading this skill is not consent. Questions/adjustments pause, refusal cancels, material scope changes require a new notice, and host approvals still apply. An explicit request for the bounded consultation needs no duplicate wait. Ordinary Sol/Luna work has no such window unless requested.
 
-Refresh a needed identification at a new turn or observed model change; reuse a verified result within the same turn. Defaults, old turns, model lists, and latency cannot establish the current model. If identification fails, continue with generic judgment without guessing or routine confirmation. Sol workers normally use the main agent's verified reasoning effort when supported; **Sol/high is an explicitly justified exception, not the default route**. Effort inheritance is separate from the latest speed policy and is not a runtime capability claim. Do not change the main model or global settings.
+## Assign and maintain one complete package
 
-## Assign a complete package
+Give one owner investigation, execution, ordinary debugging, affected verification, and related records. Integration/delivery may be included only within explicit scope and existing authorization. Keep consequential cross-package decisions and final accountability with the main agent. One writer per file and one owner per constrained runtime resource; keep coupled state, controls, and command paths together.
 
-Give the worker investigation, implementation or transformation, ordinary debugging, targeted verification, and related records together. Explicitly scoped integration and authorized delivery can also belong to that worker. Assign one writer per file and one owner per constrained resource, such as a shared app window, build directory, or benchmark environment.
-
-The main agent owns cross-package decisions and final accountability, without repeating routine work. Keep a tightly coupled interaction or data path under one owner rather than dividing its controls, state, and command routing among workers. Keep consequential requirement conflicts, architecture choices, disputed meaning, contradictory evidence, and critical experiment design with the main agent when needed; delegate the resulting execution when separable. Delegate no more authority than the user granted.
-
-Default to `fork_turns="none"` with this compact task card:
+Default to `fork_turns="none"`; use a limited history fork only when needed. Keep the task card compact:
 
 ```text
-Goal and deliverable: bounded result and success criteria.
-Parallel value: the main agent's different necessary work while this package runs.
-Critical context: user constraints, confirmed decisions, current state and limits.
-Originals: precise source/specification/image/data/evidence locations and relevant versions.
-Ownership: writable files, exclusive resources, and authorization boundaries.
-Acceptance: affected behavior and necessary checks, including material failure paths.
-Languages: visible communication follows this conversation; artifact follows user/repository.
-Speed: follow the latest main selection; give source, settings epoch, and confirmed/unverified application status. An old task-card value is not a permanent override.
-Return: result, paths, actual evidence, decisions, unresolved limits; usually 3–6 points.
+Goal / acceptance: bounded deliverable, affected behavior and necessary failure paths.
+Parallel value: the main agent's different necessary work.
+Context / originals: critical constraints, confirmed decisions, precise current source/spec/data paths.
+Ownership / authority: writable files, exclusive resources, permissions and exclusions.
+Language: visible communication follows this conversation; artifact follows user/repository.
+Speed: latest-main policy; current source/application status only when actually observable.
+Return: result, paths, actual evidence, decisions and unresolved limits, usually 3–6 points.
 ```
 
-State critical constraints directly; summaries cannot replace indispensable originals. For a broad independent investigation, delegate before doing that entire investigation yourself. Verify current original paths before dispatch, confirm access, and use a limited history fork when needed. Workers flag gaps affecting correctness or authorization while continuing unaffected work. Relay requirement/interface changes promptly to affected workers; obsolete work needs a checkpoint and stop, not an automatic restart of every package. A task-scoped model prohibition persists through later phases unless the user lifts it; do not rename/re-notify the same package to bypass refusal or make a one-time refusal permanent.
+Verify needed originals are accessible; indispensable originals cannot be replaced by a leading summary. Workers flag gaps affecting correctness/authority while continuing unaffected work. Relay material requirement/interface changes promptly; checkpoint and stop obsolete work. Reuse only if the remaining package still merits delegation and the worker/tool remains suitable. Send essential deltas, including changed skill rules to a worker that read the old version. Messaging does not prove runtime model/effort/speed changes. Replace only when necessary and worthwhile, preserving valid progress and transferring ownership first. Wait for needed results when useful main work ends; do not reimplement them. Task-scoped model prohibitions persist until lifted, and refusals cannot be bypassed by renaming/re-notifying.
 
-For continuation, first recheck whether the remaining work still merits delegation, then refresh main speed and the worker's current application status as well as essential context. Send only the delta; use a fresh worker for a new topic, unsuitable model/effort, or excessive history. Preserve applicable progress/evidence after model switches. Messaging/reuse does not prove speed synchronization. If the main agent finishes useful parallel work first, wait for the needed result instead of reimplementing it. Final integration, coupled diagnosis, and small corrections generally return to direct work; a completed worker does not require a next worker or a separate test worker.
+## Accept against the original request and stop
 
-## Accept once, against the original request
+Inspect relevant differences and actual evidence against original constraints, material boundaries, and high-risk paths. Distinguish implemented, verified, partial, and unverified; static checks, screenshots, simulations, and native execution prove different things. Reuse passed checks only while their inputs/code/contracts/dependencies/runtime remain applicable, without waiving required independent/native/data-protection checks or planned repetitions.
 
-Inspect the result, relevant differences, and evidence against original user constraints. Distinguish implemented, verified, partially verified, and unverified behavior. Match evidence to the claim: static checks, screenshots, simulated behavior, and native execution establish different things. Inspect material cross-package boundaries and high-risk paths; broaden review for missing or contradictory evidence, not by default. A fresh review is warranted when required or when independence materially reduces error risk.
-
-Reuse passed checks only while their inputs, code, contracts, dependencies, tests, and runtime conditions remain applicable. Changes require checks of affected behavior; reuse does not waive required independent confirmation, native/data-protection checks, or planned statistical repetitions. Avoid a standing worker → full main re-review → second reviewer chain. Stop when acceptance is satisfied. Do not inflate completion claims or defer required verification to the user.
-
-Return local corrections to the original worker when practical; transfer exclusive ownership before a quicker main-agent correction. Before retrying, distinguish missing context, environment/permission failure, implementation defect, and reasoning difficulty. Retry with new evidence, a correction, or a new hypothesis. Repeated unchanged attempts require a different diagnosis or a specific blocker report; a more expensive model does not fix environment failures. Preserve valid progress and continue unaffected authorized work. If the main agent had to substantially redo the package, treat that as a delegation cost and recalibrate similar work toward direct execution or a better boundary. Record a short outcome only when useful; collect usage when requested or materially needed, not on every dispatch.
+Broaden review for missing/contradictory evidence or a required/materially useful independent check, not a standing worker → full main review → second reviewer chain. Stop when acceptance is satisfied. Return local repair to the owner when practical; transfer exclusive ownership before a main-agent correction. Before retrying, distinguish missing context, permission/environment/tool failure, implementation defects, and reasoning difficulty. Retry with new evidence or a changed hypothesis; expensive models do not repair environment failures. Substantial main rework is a delegation cost: improve the boundary or prefer direct work next time. Record/calibrate outcomes or collect usage only when useful/requested.

@@ -1,5 +1,7 @@
 # Follow the main agent's speed
 
+Load this full protocol when the host exposes real speed controls or verified speed-specific inheritance, or when investigating speed synchronization itself. Without observation/control/confirmation support, keep desired and applied speed distinct, state the relevant limit once, and continue suitable work. Do not invent probes, settings epochs, or confirmations to imitate an unavailable interface. The entrypoint keeps this capability gate even when this reference is not loaded.
+
 The worker follows the main conversation's **current selected speed**, independently of worker model and reasoning effort. Following a user's current Fast or Ultrafast selection is authorized by this policy; it is not permission to enable acceleration on the main agent, change global defaults, or select a faster mode than the main agent. An explicit worker-specific user override prevails. Never silently change model or effort to imitate a speed mode.
 
 ## Resolve freshly, at the point of use

@@ -2,7 +2,7 @@
 
 # Install quota-aware-agents for Codex / OpenAI Models
 
-**Author:** malioe · **Skill version:** 1.3.0 · **Version date:** 2026-10-07 · **License:** [MIT](LICENSE)
+**Author:** malioe · **Skill version:** 1.4.0 · **Version date:** 2026-10-08 · **License:** [MIT](LICENSE)
 
 A Codex skill for choosing suitable models, defining complete work packages, managing context, and accepting results while meeting the user's quality requirements. See the [English introduction](README.en.md) for usage examples and routing details. The skill instructions and reference files are written in English.
 
@@ -70,7 +70,7 @@ The skill does not grant additional permissions or switch the main conversation'
 
 The instructions themselves have no additional runtime dependency. The optional [model resolver](quota-aware-agents/scripts/resolve-main-model.mjs) and [usage collector](quota-aware-agents/scripts/summarize-usage.mjs) use Node.js with read-only `node:sqlite` support; the validation environment is **Node.js 24.21.0**. Reuse reliable current host metadata when available; otherwise use the resolver where supported or generic routing.
 
-The resolver verifies the current session and active turn, returning minimal model metadata without changing settings. Missing bindings, conflicts, or unsupported internal formats return unknown and do not block independent authorized work. Inspect `node <skill-path>/scripts/resolve-main-model.mjs --help` and [model routing](quota-aware-agents/references/model-routing.md).
+The resolver verifies the current session and active turn, returning minimal model metadata without changing settings. Missing bindings, conflicts, or unsupported internal formats return unknown and do not block independent authorized work. Inspect `node <skill-path>/scripts/resolve-main-model.mjs --help` and [optional model identification](quota-aware-agents/references/model-identification.md).
 
 Run the collector manually only when needed. Start by checking its options:
 
