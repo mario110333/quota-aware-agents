@@ -4,7 +4,7 @@ description: "Choose direct work, tools, or bounded delegation for substantial C
 license: MIT
 metadata:
   author: 'malioe'
-  version: '1.5.0'
+  version: '1.5.1'
 ---
 
 # Effective delegation for Codex
@@ -25,6 +25,8 @@ For agent-proposed delegation, identify:
 Use lightweight judgment, not a mandatory estimate or form. A quality improvement can justify added time/cost, within explicit constraints. Do not invent parallel work, repeat the worker's investigation, fill slots, or recursively delegate. When shared contracts are unsettled, establish a representative complete flow before broad replication. **An explicit user request for a bounded read-only Astra consultation may proceed without parallel main work; it needs no duplicate approval/window.**
 
 ## Read only decision-relevant guidance
+
+Within the current task, reuse already-read guidance when it is unchanged and still available in context. Reassessing delegation does not require rereading this entry or all references. Read only the necessary files when their version changes, required guidance is unavailable after context loss, or a newly relevant branch needs it. Separately refresh dynamic task state and supported current model/effort/speed information when those decisions require it; reused instructions are not evidence of current runtime settings.
 
 | Condition | Read |
 |---|---|

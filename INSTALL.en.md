@@ -2,7 +2,7 @@
 
 # Install quota-aware-agents for Codex / OpenAI Models
 
-**Author:** malioe · **Skill version:** 1.5.0 · **Version date:** 2026-10-09 · **License:** [MIT](LICENSE)
+**Author:** malioe · **Skill version:** 1.5.1 · **Version date:** 2026-10-09 · **License:** [MIT](LICENSE)
 
 A Codex skill for choosing suitable models, defining complete work packages, managing context, and accepting results while meeting original quality and authorization requirements, reducing omissions/repair, shortening total completion time and controlling resource use. See the [English introduction](README.en.md) for usage examples and routing details. The skill instructions and reference files are written in English.
 
@@ -11,14 +11,14 @@ A Codex skill for choosing suitable models, defining complete work packages, man
 Send this request to Codex:
 
 ```text
-Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/main/quota-aware-agents.
+Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/v1.5.1/quota-aware-agents.
 ```
 
 This requires the installer and installation permissions to be available in the current session. If automatic installation is unavailable, use one of the methods below. The [official Codex skill documentation](https://learn.chatgpt.com/docs/build-skills) explains installation from other repositories and local discovery.
 
 ## Windows installation
 
-1. Download the [main-branch ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip), or use **Code → Download ZIP** on the repository's main branch. Extract it first. The main branch contains these bilingual guides; the original 1.0.0 release archive contains its original documentation.
+1. Download the [1.5.1 release ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.5.1.zip), or download **Source code (zip)** from the [latest stable Release](https://github.com/mario110333/quota-aware-agents/releases/latest). Extract it first. Each archive contains the complete files at its fixed tag; main is for ongoing development.
 2. Open PowerShell in the extracted repository directory and run:
 
    ```powershell
@@ -105,13 +105,13 @@ The package contains the reusable skill, installation script, documentation, lic
 ### One request to Codex
 
 ```text
-Please update my installed quota-aware-agents from https://github.com/mario110333/quota-aware-agents to the latest main version: locate the actual installation, back it up outside skill search directories, preserve local customizations and directory links, verify the complete package, update the original location, and report the version; skip reinstalling if it is already current.
+Please update my installed quota-aware-agents from https://github.com/mario110333/quota-aware-agents to the latest stable Release: pin its tag and commit, locate the actual installation, back it up outside skill search directories, preserve local customizations and directory links, verify the complete package, update the original location, and report the version; skip reinstalling if it is already current.
 ```
 
 ### Update flow
 
 1. Locate the actual installation and its source. It may be in `.agents/skills/`, `.codex/skills/`, or a project directory. Keep that location; check duplicate copies and the real target of symlinks or Junctions. An update does not require changing the main model or global settings.
-2. Pin repository `main` to one commit and download the complete repository at that commit into a temporary directory outside skill search locations. Verify the complete file manifest and SHA-256 values with that commit's `checksums.json`, then compare the installed version and complete files. If both match, report that it is current and stop. Also skip deployment when local customizations match the previous preservation record and upstream skill files have not changed; customized hashes differing from the original package do not by themselves mean the installation is outdated.
+2. Query the latest stable Release and resolve its tag to one pinned commit and download the complete repository at that commit into a temporary directory outside skill search locations. Verify the complete file manifest and SHA-256 values with that commit's `checksums.json`, then compare the installed version and complete files. If both match, report that it is current and stop. Also skip deployment when local customizations match the previous preservation record and upstream skill files have not changed; customized hashes differing from the original package do not by themselves mean the installation is outdated.
 3. Back up the entire existing installation outside skill search directories and verify the backup. Merge local customizations using the original upstream baseline and the new version, preserving explicit preferences; ask only when an actual conflict cannot be resolved. Distinguish the verified upstream package from a locally adapted result: upstream hashes cannot establish that customized files are identical.
 4. Prepare and check the complete replacement in the temporary directory before deployment. `skill-installer` and `Install.ps1` reject existing destinations, so use them for a temporary installation check first rather than repeatedly targeting the installed copy. Replace an ordinary directory after backup; preserve a linked installation and update its verified real target. Remove obsolete upstream package files only according to the old manifest, preserving files of unknown local origin. Restore the verified backup if deployment fails.
 5. Verify the deployed complete files, or the merged result when customized. Report the version, upstream commit, installation path, backup path, and retained customizations. Use the updated skill on the next turn; if it does not appear, restart Codex as described in the [official documentation](https://learn.chatgpt.com/docs/build-skills). An update need not interrupt other work by restarting the app automatically.

@@ -1,7 +1,7 @@
 {
   "name": "quota-aware-agents",
   "author": "malioe",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "version_date": "2026-10-09",
   "files": [
     {
@@ -50,7 +50,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "93589D3C32A43E39AD1FBCA80109393670D9250A49E056F6E79E3F7C2C193994"
+      "sha256": "53835B46A94F5046D78080A2EA93E234E62B6FA43A2852600F25D61109EDE4A2"
     }
   ]
 }

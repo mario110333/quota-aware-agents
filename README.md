@@ -4,7 +4,7 @@
 
 面向 Codex 的按需分工 Skill：先判断任务是否值得交给子代理，再选择合适的模型和推理强度。目标是减少实质错误、遗漏与返工，缩短从开始到验收完成的总时间，并控制整个任务的资源消耗。简单工作直接完成，分工须计入上下文、协调、等待、整合和验收的开销。
 
-**作者：malioe** · **当前版本：1.5.0** · **许可证：[MIT](LICENSE)**
+**作者：malioe** · **当前版本：1.5.1** · **许可证：[MIT](LICENSE)**
 
 [安装与首次使用](#安装与首次使用) · [已安装时更新](#已安装时更新) · [使用示例](#使用示例) · [分工规则](#分工规则) · [常见问题](#常见问题) · [详细文档](#详细文档)
 
@@ -15,27 +15,31 @@
 在 Codex 中输入：
 
 ```text
-请使用 $skill-installer 从 https://github.com/mario110333/quota-aware-agents/tree/main/quota-aware-agents 安装这个 Skill。
+请使用 $skill-installer 从 https://github.com/mario110333/quota-aware-agents/tree/v1.5.1/quota-aware-agents 安装这个 Skill。
 ```
 
 安装完成后，在任务中提及 `$quota-aware-agents` 即可。Codex 也可以在任务匹配描述时选择它；是否分工仍需按实际任务判断。
 
 也可以手动安装：
 
-- **Windows：**下载 [main 分支 ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip)，解压后在仓库根目录运行 `./Install.ps1`。脚本核对完整 Skill 文件清单与 [checksums.json](checksums.json)，无需管理员权限；目标目录已存在时会停止。
+- **Windows：**下载 [1.5.1 发布 ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.5.1.zip)，解压后在仓库根目录运行 `./Install.ps1`。脚本核对完整 Skill 文件清单与 [checksums.json](checksums.json)，无需管理员权限；目标目录已存在时会停止。
 - **Windows / macOS / Linux：**将完整的 `quota-aware-agents` 文件夹复制到 `~/.agents/skills/`。更新前，将旧副本备份并移出 Skill 搜索目录。
 
-具体命令、更新、卸载和排查步骤见[安装说明](安装说明.md)。当前 1.5.0 从 main 分支获取；[Releases](https://github.com/mario110333/quota-aware-agents/releases) 保留历史版本。安装 Skill 不会扩大文件、工具或外部操作的授权范围。
+具体命令、更新、卸载和排查步骤见[安装说明](安装说明.md)。正式版本从[最新 Release](https://github.com/mario110333/quota-aware-agents/releases/latest)获取；main 用于持续开发，安装与更新默认固定正式版本。安装 Skill 不会扩大文件、工具或外部操作的授权范围。
 
 ## 已安装时更新
 
 把下面这一句话发给 Codex：
 
 ```text
-请将已安装的 quota-aware-agents 从 https://github.com/mario110333/quota-aware-agents 更新到 main 最新版：核对实际安装位置，先在 Skill 搜索目录外备份，保留本地定制和目录链接，校验完整包后更新原位置并报告版本；已是最新则无需重装。
+请将已安装的 quota-aware-agents 从 https://github.com/mario110333/quota-aware-agents 更新到最新正式 Release：固定其 tag 和提交，核对实际安装位置，先在 Skill 搜索目录外备份，保留本地定制和目录链接，校验完整包后更新原位置并报告版本；已是最新则无需重装。
 ```
 
 更新流程包括来源与完整文件比对、备份、校验和现有安装的替换。安装器会保护已有目录，具体的临时下载、本地定制及目录链接处理见[更新方法](安装说明.md#更新与卸载)。更新后在下一轮使用；若未显示，按[官方说明](https://learn.chatgpt.com/docs/build-skills)重启 Codex。
+
+## 1.5.1 调整
+
+明确复用未变化且仍在上下文中的指引，重新判断分工无需重读全文；动态任务与模型／速度状态仍按需要刷新。安装与一句话更新默认指向正式 Release；新增[发布流程与核验](RELEASING.md)，只有版本、tag、Latest Release 和实际下载包均核验通过，才算发布完成。
 
 ## 1.5.0 调整
 

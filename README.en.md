@@ -4,7 +4,7 @@
 
 A delegation skill for Codex that first assesses whether delegation is worthwhile, then selects an appropriate model and reasoning effort. The goal is fewer material errors, omissions and repairs, shorter time from start through acceptance, and controlled total resource use. Simple work stays direct; delegation accounts for context, coordination, waiting, integration and acceptance overhead.
 
-**Author: malioe** · **Current version: 1.5.0** · **License: [MIT](LICENSE)**
+**Author: malioe** · **Current version: 1.5.1** · **License: [MIT](LICENSE)**
 
 [Install and first use](#install-and-first-use) · [Update](#update-an-existing-installation) · [Examples](#examples) · [Delegation rules](#delegation-rules) · [FAQ](#faq) · [Detailed documentation](#detailed-documentation)
 
@@ -15,27 +15,31 @@ Designed for OpenAI models in Codex and the agent tools available in the current
 Enter this in Codex:
 
 ```text
-Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/main/quota-aware-agents.
+Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/v1.5.1/quota-aware-agents.
 ```
 
 After installation, mention `$quota-aware-agents` in your task. Codex can also select it when a task matches its description; whether to delegate still depends on the actual task.
 
 You can also install manually:
 
-- **Windows:** download the [main-branch ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/heads/main.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies the complete skill manifest against [checksums.json](checksums.json), requires no administrator rights, and stops if the destination already exists.
+- **Windows:** download the [1.5.1 release ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.5.1.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies the complete skill manifest against [checksums.json](checksums.json), requires no administrator rights, and stops if the destination already exists.
 - **Windows / macOS / Linux:** copy the entire `quota-aware-agents` folder into `~/.agents/skills/`. Before updating, back up the old copy and move it outside skill search directories.
 
-See the [installation guide](INSTALL.en.md) for commands, updates, removal, and troubleshooting. Get the current 1.5.0 version from main; [Releases](https://github.com/mario110333/quota-aware-agents/releases) contains historical versions. Installing the skill does not expand authorization for files, tools, or external actions.
+See the [installation guide](INSTALL.en.md) for commands, updates, removal, and troubleshooting. Get stable versions from the [latest Release](https://github.com/mario110333/quota-aware-agents/releases/latest). Main is for ongoing development; default installation and updates pin a stable version. Installing the skill does not expand authorization for files, tools, or external actions.
 
 ## Update an existing installation
 
 Send this single request to Codex:
 
 ```text
-Please update my installed quota-aware-agents from https://github.com/mario110333/quota-aware-agents to the latest main version: locate the actual installation, back it up outside skill search directories, preserve local customizations and directory links, verify the complete package, update the original location, and report the version; skip reinstalling if it is already current.
+Please update my installed quota-aware-agents from https://github.com/mario110333/quota-aware-agents to the latest stable Release: pin its tag and commit, locate the actual installation, back it up outside skill search directories, preserve local customizations and directory links, verify the complete package, update the original location, and report the version; skip reinstalling if it is already current.
 ```
 
 The update flow compares the source and complete files, creates a backup, verifies the package, and replaces the existing installation. The installer protects existing directories; see [update instructions](INSTALL.en.md#update-or-uninstall) for temporary downloads, local customizations, and directory links. Use the updated skill on your next turn; if it does not appear, restart Codex as described in the [official guidance](https://learn.chatgpt.com/docs/build-skills).
+
+## Changes in 1.5.1
+
+Reuse unchanged guidance still available in context; reassessing delegation does not require rereading everything. Refresh dynamic task and model/speed state separately when needed. Installation and the one-line update now prefer stable Releases. The [release procedure and verifier](RELEASING.md) require matching versions, tag, Latest Release and actual archive before publication is complete.
 
 ## Changes in 1.5.0
 
