@@ -2,7 +2,7 @@
 
 # Install quota-aware-agents for Codex / OpenAI Models
 
-**Author:** malioe · **Skill version:** 1.5.1 · **Version date:** 2026-10-09 · **License:** [MIT](LICENSE)
+**Author:** malioe · **Skill version:** 1.7.0 · **Version date:** 2026-11-19 · **License:** [MIT](LICENSE)
 
 A Codex skill for choosing suitable models, defining complete work packages, managing context, and accepting results while meeting original quality and authorization requirements, reducing omissions/repair, shortening total completion time and controlling resource use. See the [English introduction](README.en.md) for usage examples and routing details. The skill instructions and reference files are written in English.
 
@@ -11,14 +11,14 @@ A Codex skill for choosing suitable models, defining complete work packages, man
 Send this request to Codex:
 
 ```text
-Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/v1.5.1/quota-aware-agents.
+Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/v1.7.0/quota-aware-agents.
 ```
 
 This requires the installer and installation permissions to be available in the current session. If automatic installation is unavailable, use one of the methods below. The [official Codex skill documentation](https://learn.chatgpt.com/docs/build-skills) explains installation from other repositories and local discovery.
 
 ## Windows installation
 
-1. Download the [1.5.1 release ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.5.1.zip), or download **Source code (zip)** from the [latest stable Release](https://github.com/mario110333/quota-aware-agents/releases/latest). Extract it first. Each archive contains the complete files at its fixed tag; main is for ongoing development.
+1. Download the [1.7.0 release ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.7.0.zip), or download **Source code (zip)** from the [latest stable Release](https://github.com/mario110333/quota-aware-agents/releases/latest). Extract it first. Each archive contains the complete files at its fixed tag; main is for ongoing development.
 2. Open PowerShell in the extracted repository directory and run:
 
    ```powershell
@@ -56,22 +56,11 @@ The skill allows automatic selection when a task matches its description. Explic
 
 ## Included defaults
 
-- Judge concrete quality benefit, time from start through acceptance and total resource overhead together; all three need not improve, but explicit budgets/deadlines still apply.
-- With Sol as main, default zero workers: simple, ordinary, and difficult coupled work stays direct; steps/files do not justify dispatch.
-- Worthwhile independent complete packages can use Sol workers, normally preserving verified Sol main effort; high is a reasoned exception.
-- Mechanical batches use tools/scripts; sufficient explicit-rule semantic batches can use Luna/max when independently verifiable with useful parallel main work.
-- Astra supplies a bounded read-only second opinion on a critical question. Automatic proposals use a 30-second notice window: unanswered execution needs prior authorization, questions/changes pause it, and a direct bounded read-only consultation request needs neither duplicate approval nor invented parallel work. See [Astra consultation](quota-aware-agents/references/astra-consultation.md).
-- Default worker IDs are `gpt-6.1-sol`, `gpt-6-luna` and `gpt-6-astra`; no fallback to `gpt-6-sol` / `gpt-5.6-luna`, including inheritance and reuse. Specific explicit user model choices prevail; historical identification/accounting remains valid.
-- Worker speed follows the latest main selection, separately from reasoning effort. Refresh at dispatch, continuation, and observed switches; accept only current-version confirmations. A real control or speed-specific inheritance evidence is required to claim applied speed. See [speed following](quota-aware-agents/references/speed-following.md) for repeated switches and unavailable-tool limits.
-- Resolve the current main model only when routing needs it; preserve valid progress after a switch and use generic judgment when unknown. Reassess after completion, return coupled integration to direct work, and avoid standing review chains.
-
-Task cards require only necessary goals, original evidence, constraints and ownership; add other context when useful. Verify possible background writes before affected takeover, reconcile unknown external effects using real recovery/query contracts, and do not treat same-source agreement as independent evidence.
-
-The skill does not grant additional permissions or switch the main conversation's model or global settings. Model/effort support depends on the current tool and account. If a default combination is unavailable, choose a suitable supported route among the three default IDs or work directly; tool availability alone does not authorize a legacy-model substitution. See [model routing](quota-aware-agents/references/model-routing.md) for the full rules.
+Consult the skill when preparing an independent assignment or when independent review is requested. Choose the worker and effort for the task, preferring the latest suitable stable version in its family. See [model routing](quota-aware-agents/references/model-routing.md) for pins, unavailable models and reuse.
 
 ## Optional helper scripts
 
-The instructions themselves have no additional runtime dependency. The optional [model resolver](quota-aware-agents/scripts/resolve-main-model.mjs) and [usage collector](quota-aware-agents/scripts/summarize-usage.mjs) use Node.js with read-only `node:sqlite` support; the validation environment is **Node.js 24.21.0**. Reuse reliable current host metadata when available; otherwise use the resolver where supported or generic routing.
+The instructions themselves have no additional runtime dependency. The optional [model resolver](quota-aware-agents/scripts/resolve-main-model.mjs) and [usage collector](quota-aware-agents/scripts/summarize-usage.mjs) use Node.js with read-only `node:sqlite` support; the validation environment is **Node.js 24.21.0**. The resolver is optional when the user asks which model is active.
 
 The resolver verifies the current session and active turn, returning minimal model metadata without changing settings. Missing bindings, conflicts, or unsupported internal formats return unknown and do not block independent authorized work. Inspect `node <skill-path>/scripts/resolve-main-model.mjs --help` and [optional model identification](quota-aware-agents/references/model-identification.md).
 
@@ -85,7 +74,7 @@ It reads local Codex databases and rollout logs in read-only mode and writes rep
 
 Use optional `--since` (exclusive start), required `--cutoff` (inclusive end), and repeated `--thread` for multiple explicit roots. Shared descendants are counted once; source groups and cumulative scopes are explained in [cost and usage](quota-aware-agents/references/cost-model.md). The output directory must not already exist.
 
-Internal Codex log formats can change. Unsupported or incomplete records must be reported, and statistics are not an actual bill, a measure of subscription allowance consumption, or proof of savings. API amounts, Codex credits, and subscription usage are separate measures. The cost reference's current snapshot is dated **2026-09-30**, with historical rates dated separately; verify applicable rates when needed. The skill does not promise a fixed saving percentage.
+Internal Codex log formats can change. Unsupported or incomplete records must be reported, and statistics are not an actual bill, a measure of subscription allowance consumption, or proof of savings. API amounts, Codex credits, and subscription usage are separate measures. The cost reference's historical snapshot is dated **2026-09-30**, with historical rates dated separately; verify applicable rates when needed. The skill does not promise a fixed saving percentage.
 
 The package contains the reusable skill, installation script, documentation, licenses, and checksum information. It does not include the author's conversations, account configuration, credentials, historical usage records, or project source code.
 
@@ -97,7 +86,7 @@ The package contains the reusable skill, installation script, documentation, lic
 | `Install.ps1` reports an existing installation | Back up and move the old folder outside skill search directories, then install again. The script deliberately does not overwrite it. |
 | PowerShell blocks the script | Use manual installation; changing the system execution policy is unnecessary. |
 | Integrity verification fails | Extract a fresh complete ZIP and keep the skill files with their matching checksum manifest. Do not bypass the check or combine files from different versions. |
-| A suggested model or reasoning effort is unavailable | Choose a suitable supported route among the three default IDs or continue directly. Installing the skill does not add model access. |
+| A suggested model or reasoning effort is unavailable | Use an authorized fallback for a pinned version, or handle the feasible work directly. Installing the skill does not add model access. |
 | The optional collector cannot load `node:sqlite` | Use a compatible Node.js runtime if you need statistics. The skill itself can be used without the collector. |
 
 ## Update or uninstall

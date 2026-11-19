@@ -1,6 +1,6 @@
 # Optional main-model identification
 
-Read only when identifying the active main model/effort would change a remaining routing decision and accurate current host metadata is absent. Direct work, scripts, and generic routing do not require a probe. This adapter does not identify speed or change settings.
+Use this diagnostic when the user asks to identify the active main model or effort. Ordinary worker selection uses the task requirements and the live worker options.
 
 Prefer host metadata explicitly bound to this conversation and active turn. Reuse a verified result within the same turn; refresh when needed at a new turn or observed model change. A generic family name cannot establish a specific-model route. Defaults, historical database fields, model lists, old statements, the latest work-directory file, and latency are not current-model evidence.
 
@@ -11,7 +11,7 @@ node <skill>/scripts/resolve-main-model.mjs
 node <skill>/scripts/resolve-main-model.mjs --help
 ```
 
-The result includes status, model, known effort, source, session/turn binding, strategy and a short reason. `astra_main` / `sol_main` select the corresponding routing rows; `other_known` requires the exact model's row; `unknown` uses generic judgment. An observed unmapped identifier may remain present with unknown strategy. No result recommends changing the main model.
+The result includes identity status, model, effort when available, source and session/turn binding. A verified current ID is known even when it appeared after this skill was written. The optional adapter retains its historical `strategy` labels for existing consumers and returns `other_known` for other verified IDs. These labels carry no selection or override authority. The live worker tool determines availability.
 
 Use an explicitly supplied host file only when its producer is trusted to describe the active session. A manually written model name is not discovery evidence. The host contract is `thread_id`, `turn_id`, `active_turn_id`, and `model`, with `active_turn_id` equal to `turn_id`; optional `effort` remains null when absent. `--thread` / `--turn` assert bindings rather than override contradictory environment evidence. `--codex-home` / `--db` choose source locations. Invoke in the main agent's own bound session; workers must not substitute their identities for the main's.
 

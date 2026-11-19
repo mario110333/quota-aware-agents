@@ -2,7 +2,7 @@
 
 Use for a material price comparison, requested usage accounting, or routing calibration. Routine delegation does not require browsing prices or scanning logs. Refresh rates when the model, tier, billing surface, known pricing, or request for a current quote requires it. Unknown rates or usage remain unknown.
 
-## Official rate snapshot: 2026-09-30
+## Historical rate snapshot for September 2026
 
 API Standard, short context, USD per million tokens:
 
@@ -25,7 +25,7 @@ Codex Standard, credits per million tokens:
 
 Source: [Codex pricing](https://learn.chatgpt.com/docs/pricing). The tables are Standard-rate reference scenarios; worker speed follows the current main selection under [speed following](speed-following.md). For current or historical accelerated usage, consult the applicable official rates and distinguish purchased credits from included usage; never apply Standard silently to an unknown or different tier. A selected or requested mode does not establish the applied tier of every worker/request. Tokens, API-equivalent dollars, credit equivalents, actual charges, and subscription usage percentages are separate measures. Do not derive task subscription consumption from API prices or account-wide balance changes.
 
-Historical rate rows do not authorize legacy-worker routing. Model selection follows [model routing](model-routing.md).
+Use these rows only for labeled historical scenarios. Current tool capabilities and [model routing](model-routing.md) govern worker selection.
 
 ## Calculate without double counting
 
@@ -45,7 +45,9 @@ State the time range, timezone, thread tree, and cutoff before presenting totals
 
 Separate parent and worker totals, as well as historical model totals. Parent cost can dominate even when workers are well routed. Attribute repair or coordination costs only where records support that separation; observations of late defects alone do not establish their exact token cost. An expensive package may contain necessary data-protection checks or statistical repetitions, not redundant work.
 
-Use source metadata and reliable spawn relationships to distinguish user/main conversations, deliberate workers, automatic approval reviews, and unknown sources. An explicitly selected root is not automatically a main agent. Include only selected roots and reliably linked descendants; do not assign all account-wide approval activity to one project. Public rates for an approval model may be unavailable: show its usage separately with unpriced cost, not zero. ChatGPT, background work, image/tool fees, or missing local records require explicit coverage limits.
+For a deep token review, report request count, input, cached input, uncached input (input minus cached), output, and its reasoning subset. Compare the first observed worker request with subsequent input distributions when scope permits. Distinguish a true first request from the first one visible in a truncated window. A cache hit can be useful reuse. Long input alone cannot identify which tool result, instruction or repair caused it. Prioritize avoidable rounds and oversized evidence transfers where outcomes support that diagnosis.
+
+Use source metadata and reliable spawn relationships to distinguish user/main conversations, agent-created chats (`agent_created_thread`), deliberate workers, automatic approval reviews and unknown sources. Keep agent-created chats separate from subagent calls. An explicitly selected root can have any of these roles. Include only selected roots and reliably linked descendants. Show approval usage separately when observed. Missing local records, external tools and unavailable pricing limit coverage.
 
 For dollar or credit comparisons, establish per-request context bands and applicable historical rates. If the service tier is unavailable, report it as unknown; an explicitly labeled Standard-rate scenario is permissible, but not an actual bill. Keep subscription allowances, credit equivalents, API equivalents, and cash charges separate. Do not reconstruct missing request attribution from a mismatching cumulative counter.
 

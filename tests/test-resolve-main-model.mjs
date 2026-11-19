@@ -20,7 +20,7 @@ function invoke(args=[],env={CODEX_THREAD_ID:'bound'}){const r=spawnSync(process
 function hostFile(overrides={}){fs.writeFileSync(host,JSON.stringify({thread_id:'bound',turn_id:'t',active_turn_id:'t',model:'gpt-6.1-sol',effort:'high',body:'PRIVATE_BODY',...overrides}));return ['--host-metadata',host];}
 test.after(()=>{const target=fs.realpathSync(dir),root=fs.realpathSync(here);assert.ok(target.startsWith(root+path.sep)&&path.basename(target).startsWith('.model-fixture-'));fs.rmSync(target,{recursive:true});});
 test('current binding selects active Astra/Sol/other/unmapped and emits minimal metadata only',()=>{
- for(const [model,strategy,status]of [['gpt-6-astra','astra_main','known'],['gpt-6.1-sol','sol_main','known'],['gpt-6-sol','other_known','known'],['gpt-6-luna','other_known','known'],['future-model','unknown','unknown']]) {
+ for(const [model,strategy,status]of [['gpt-6-astra','astra_main','known'],['gpt-6.1-sol','sol_main','known'],['gpt-6-sol','other_known','known'],['gpt-6-luna','other_known','known'],['future-model','other_known','known']]) {
   write([meta,start('t'),ctx('t',model)]);const before=fs.readFileSync(dbfile),r=invoke();assert.equal(r.status,0);assert.equal(r.data.model,model);assert.equal(r.data.strategy,strategy);assert.equal(r.data.status,status);
   assert.deepEqual(Object.keys(r.data).sort(),['status','model','effort','source','thread_id','turn_id','strategy','reason'].sort());assert.doesNotMatch(r.stdout,/PRIVATE/);assert.deepEqual(fs.readFileSync(dbfile),before);
  }

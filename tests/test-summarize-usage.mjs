@@ -68,6 +68,12 @@ test('unknown/invalid fields, source absence and source conflicts stay partial w
  const r=run(f,['a','b'],['--ledger']);assert.equal(r.status,0,r.stderr);assert.equal(r.data.telemetry_status,'partial');assert.equal(r.ledger.find(x=>x.thread_id==='a').total_tokens,null);assert.equal(r.ledger.find(x=>x.thread_id==='a').model,null);assert.equal(r.data.field_coverage.output_tokens.invalid,1);assert.deepEqual(new Set(r.data.source_classification.unknown_threads),new Set(['a','b']));assert.ok(r.data.checks.some(x=>x.type==='conflicting_thread_source'));
  const old=fixture([{id:'a',source:null,thread_source:null,rows:[ctx(),req('a','r',10)]}],[],{schemaSources:false});assert.equal(run(old).data.by_source[0].key,'unknown');
 });
+test('agent-created chats form a separate group and contradictory spawn evidence stays unknown',()=>{
+ const f=fixture([{id:'chat',thread_source:'agent_created_thread',rows:[ctx(),req('chat','r1',10)]},{id:'mismatch',thread_source:'agent_created_thread',source:source('p'),rows:[ctx(),req('mismatch','r2',10)]}]);
+ const r=run(f,['chat','mismatch']);
+ assert.deepEqual(new Map(r.data.by_source.map(x=>[x.key,x.calls])),new Map([['agent_created_thread',1],['unknown',1]]));
+ assert.ok(r.data.checks.some(x=>x.type==='conflicting_thread_source'&&x.thread_id==='mismatch'));
+});
 test('guardian only appears when explicitly selected or reached through selected spawn edges',()=>{
  const f=fixture([{id:'a',rows:[ctx(),req('a','a',10)]},{id:'g',source:guardian,thread_source:'guardian_review',rows:[ctx(),req('g','g',20)]},{id:'unrelated',source:guardian,thread_source:'guardian_review',missing:true}],[['a','g']]);
  const r=run(f);assert.equal(r.data.thread_count,2);assert.equal(r.data.by_source.find(x=>x.key==='guardian').calls,1);assert.ok(!r.data.files.some(x=>x.thread_id==='unrelated'));

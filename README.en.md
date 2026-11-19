@@ -4,7 +4,7 @@
 
 A delegation skill for Codex that first assesses whether delegation is worthwhile, then selects an appropriate model and reasoning effort. The goal is fewer material errors, omissions and repairs, shorter time from start through acceptance, and controlled total resource use. Simple work stays direct; delegation accounts for context, coordination, waiting, integration and acceptance overhead.
 
-**Author: malioe** · **Current version: 1.5.1** · **License: [MIT](LICENSE)**
+**Author: malioe** · **Current version: 1.7.0** · **License: [MIT](LICENSE)**
 
 [Install and first use](#install-and-first-use) · [Update](#update-an-existing-installation) · [Examples](#examples) · [Delegation rules](#delegation-rules) · [FAQ](#faq) · [Detailed documentation](#detailed-documentation)
 
@@ -15,14 +15,14 @@ Designed for OpenAI models in Codex and the agent tools available in the current
 Enter this in Codex:
 
 ```text
-Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/v1.5.1/quota-aware-agents.
+Please use $skill-installer to install this skill from https://github.com/mario110333/quota-aware-agents/tree/v1.7.0/quota-aware-agents.
 ```
 
-After installation, mention `$quota-aware-agents` in your task. Codex can also select it when a task matches its description; whether to delegate still depends on the actual task.
+Mention `$quota-aware-agents` when planning a delegation or requesting independent review. Codex can also select it when one of those needs arises.
 
 You can also install manually:
 
-- **Windows:** download the [1.5.1 release ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.5.1.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies the complete skill manifest against [checksums.json](checksums.json), requires no administrator rights, and stops if the destination already exists.
+- **Windows:** download the [1.7.0 release ZIP](https://github.com/mario110333/quota-aware-agents/archive/refs/tags/v1.7.0.zip), extract it, and run `./Install.ps1` from the repository root. The script verifies the complete skill manifest against [checksums.json](checksums.json), requires no administrator rights, and stops if the destination already exists.
 - **Windows / macOS / Linux:** copy the entire `quota-aware-agents` folder into `~/.agents/skills/`. Before updating, back up the old copy and move it outside skill search directories.
 
 See the [installation guide](INSTALL.en.md) for commands, updates, removal, and troubleshooting. Get stable versions from the [latest Release](https://github.com/mario110333/quota-aware-agents/releases/latest). Main is for ongoing development; default installation and updates pin a stable version. Installing the skill does not expand authorization for files, tools, or external actions.
@@ -36,6 +36,10 @@ Please update my installed quota-aware-agents from https://github.com/mario11033
 ```
 
 The update flow compares the source and complete files, creates a backup, verifies the package, and replaces the existing installation. The installer protects existing directories; see [update instructions](INSTALL.en.md#update-or-uninstall) for temporary downloads, local customizations, and directory links. Use the updated skill on your next turn; if it does not appear, restart Codex as described in the [official guidance](https://learn.chatgpt.com/docs/build-skills).
+
+## Changes in 1.7.0
+
+Narrower skill selection, task-based worker choice and a preference for the latest supported stable version in each family. Earlier versions require a task-specific reason. Independent reviews use the same delegation rules as other work.
 
 ## Changes in 1.5.1
 
@@ -61,32 +65,15 @@ The main agent first resolves shared data contracts, then decides whether there 
 Use $quota-aware-agents to review these 20 translations against the terminology list and source texts. Keep the review read-only; report material omissions or meaning changes with source evidence.
 ```
 
-Use scripts first for deterministic checks such as counts, references, and exact matches. A sufficiently large semantic batch with explicit rules and readily verifiable results may suit Luna. If you only want a delegation proposal, specify “plan only; do not launch workers or execute the task.”
+Use scripts for exact comparisons. A worker can review a semantic batch against the supplied terminology. To request a plan only, say so.
 
 ## Delegation rules
 
-**Decide whether delegation is worthwhile before choosing a model.** A worker should own a complete package with clear boundaries, acceptance criteria, and exclusive ownership, including necessary investigation, execution, ordinary debugging, verification, and records. The main advances different necessary work in parallel and remains responsible for integration and acceptance. Agent-proposed delegation needs a concrete quality, completion-time or total-resource benefit. Better quality may justify added time/cost within explicit budgets and deadlines. An explicit bounded read-only Astra request does not require parallel work.
+Use a worker for a complete assignment that the main chat can accept without repeating it. Use tools for deterministic work and keep tightly coupled decisions together. An explicitly requested independent review may be worthwhile even when the main needs to wait.
 
-| Work | Approach |
-| --- | --- |
-| Short answers, small edits, ordinary implementation | Main agent directly; a Sol main starts with zero workers |
-| Extremely difficult but tightly coupled problems | Keep reasoning and decisions with the main agent; difficulty alone does not justify splitting the task |
-| Worthwhile independent work packages | `gpt-6.1-sol` may help; with Sol as main, normally preserve its verified reasoning effort when the tool supports it. Sol/high requires an explicit justification |
-| Mechanical batches | Prefer deterministic tools or scripts |
-| Sufficiently large semantic batches with explicit rules and easy verification | Consider `gpt-6-luna` / `max`; work directly if ambiguity or repair erases the benefit |
-| Critical decisions needing a second opinion | Consult `gpt-6-astra` on a concrete question, normally at `xhigh`, within a bounded read-only scope |
+Choose the worker family and effort for the task. Easily checked work can suit a lighter model. A subtle, consequential judgment can justify stronger reasoning. For a new worker, prefer the latest available stable version in the chosen family that meets the requirements. Inherit only if the configuration fits. An exact user pin allows only a fallback the user has authorized. Otherwise an earlier supported version may be appropriate for compatibility, reproduction or when the latest suitable version is unavailable. Preserve exclusions on launch and reuse. See [model routing](quota-aware-agents/references/model-routing.md).
 
-With Astra as main, worthwhile independent execution packages can use Sol/xhigh. Other or unknown main models require judgment based on actual capabilities and task risk. Default worker IDs are `gpt-6.1-sol`, `gpt-6-luna` and `gpt-6-astra`. If a combination is unavailable, choose a suitable supported route among these or work directly. Do not fall back to `gpt-6-sol` or `gpt-5.6-luna`, including through inheritance or old-worker reuse. A specific explicit user model choice prevails. Historical IDs remain valid for identification/accounting; host-internal service models are outside this skill’s control.
-
-Completion or cancellation messages alone do not establish that background writes stopped; verify before taking over affected resources. Reconcile unknown write/publication outcomes through the actual tool’s idempotent recovery or reliable query contract; without either, retain the unknown result rather than blindly retry. Several agents citing one report do not provide independent evidence.
-
-When shared interfaces are unsettled, complete and verify a representative end-to-end slice first. Reassess after phase changes, worker completion, or material new evidence, and stop after acceptance. Avoid duplicate investigation and standing chains of repeated reviews.
-
-### Astra consultation and authorization
-
-Astra provides a second opinion on a specific critical question. The task owner handles implementation and acceptance; consultation does not automatically expand into ongoing supervision or execution.
-
-For an automatic proposal, deliver an interactive notice describing the question, scope, and model, then allow **30 seconds for feedback**. Proceed after silence only if you have previously explicitly authorized that default. Approval can release the plan early, refusal cancels it, and questions or adjustments pause it. A new scope needs a new notice. A direct request for that bounded consultation needs no duplicate wait. See the [Astra consultation rules](quota-aware-agents/references/astra-consultation.md) for authorization, cancellation, and late replies.
+Give each shared file or constrained runtime one owner. Before takeover, resolve any continuing writes or uncertain effects. Accept consequential claims against original evidence.
 
 ### Following the main agent's speed
 
@@ -96,13 +83,13 @@ Actual synchronization requires host speed controls or verified inheritance. Ins
 
 ## FAQ
 
-**Does a Sol/xhigh main agent need workers?**
+**When should I keep the task in the main chat?**
 
-Usually, direct work is sufficient. Delegate only when an independent package and necessary parallel work can outweigh handoff, waiting, acceptance, and repair. A main xhigh setting does not automatically warrant a Sol/high worker.
+Work directly when a handoff would make another agent reconstruct the same evidence or redo earlier decisions.
 
 **Will it change the main model, global settings, or permissions?**
 
-No. Installation and use grant no additional model access, file mutations, external actions, or recursive delegation. Automatic Astra consultation also follows the authorization conditions above.
+No. Installation and use grant no additional model access, file mutations, external actions, or recursive delegation.
 
 **Does it guarantee lower cost or faster completion?**
 
@@ -119,9 +106,8 @@ Yes. Both READMEs describe the same rules; the skill and reference files are wri
 ## Detailed documentation
 
 - [SKILL.md](quota-aware-agents/SKILL.md): core workflow, task cards, and acceptance.
-- [Model routing](quota-aware-agents/references/model-routing.md): models, reasoning effort, the Sol/high exception, and unavailable routes.
+- [Model routing](quota-aware-agents/references/model-routing.md): task fit, stable versions, and fallback conditions.
 - [Optional model identification](quota-aware-agents/references/model-identification.md): session binding, the helper, and unknown fallback.
-- [Astra consultation](quota-aware-agents/references/astra-consultation.md): notice windows, authorization, scope changes, and cancellation.
 - [Speed following](quota-aware-agents/references/speed-following.md): fresh settings, repeated switches, and host capability limits.
 - [Execution evidence](quota-aware-agents/references/execution-evidence.md): shared resources, cancellation handoff, unknown outcomes, sources and observation validity.
 - [Cost and usage](quota-aware-agents/references/cost-model.md): accounting measures and limits of optional tools.

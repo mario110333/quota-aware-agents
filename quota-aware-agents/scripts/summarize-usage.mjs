@@ -75,11 +75,15 @@ function outputCheck(o,t) {
 }
 function sourceEvidence(source,threadSource) {
  const roles=[];let parent=null,invalid=false;
- if(threadSource!=null) {const r=({user:'main',subagent:'worker',guardian_review:'guardian'})[threadSource];if(r)roles.push(r);else invalid=true;}
+ if(threadSource!=null) {
+  const sourceRoles=new Map([['user','main'],['agent_created_thread','agent_created_thread'],['subagent','worker'],['guardian_review','guardian']]);
+  const role=sourceRoles.get(threadSource);
+  if(role)roles.push(role);else invalid=true;
+ }
  if(source!=null) {
   let s=source;
   if(typeof s==='string'&&s.startsWith('{')) {try{s=JSON.parse(s);}catch{invalid=true;}}
-  if(['cli','vscode','exec','app_server'].includes(s))roles.push('main');
+  if(['cli','vscode','exec','app_server'].includes(s))roles.push('chat_transport');
   else if(s&&typeof s==='object') {
    const sub=s.subagent;
    if(sub?.thread_spawn) {roles.push('worker');parent=id(sub.thread_spawn.parent_thread_id);if(!parent)invalid=true;}
@@ -91,9 +95,12 @@ function sourceEvidence(source,threadSource) {
 }
 function classify(thread,session,edges,warn) {
  const db=sourceEvidence(thread.source,thread.thread_source),sm=sourceEvidence(session?.source,session?.thread_source);
- const roles=[...db.roles,...sm.roles],parents=[db.parent,sm.parent].filter(Boolean);
+ const evidence=[...db.roles,...sm.roles],parents=[db.parent,sm.parent].filter(Boolean);
+ const roles=evidence.filter(role=>role!=='chat_transport');
+ const chatRoles=['main','agent_created_thread'];
+ if(evidence.includes('chat_transport')&&!roles.some(role=>chatRoles.includes(role)))roles.push('main');
  const incoming=edges.filter(e=>e.child_thread_id===thread.id).map(e=>e.parent_thread_id);
- if(new Set(roles).size>1||new Set(parents).size>1||(parents.length&&incoming.length&&parents.some(p=>!incoming.includes(p)))||(roles.includes('main')&&incoming.length)) {warn('conflicting_thread_source');return 'unknown';}
+ if(new Set(roles).size>1||new Set(parents).size>1||(parents.length&&incoming.length&&parents.some(p=>!incoming.includes(p)))||(roles.some(role=>chatRoles.includes(role))&&incoming.length)) {warn('conflicting_thread_source');return 'unknown';}
  if(db.invalid||sm.invalid) {warn('unsupported_thread_source');return 'unknown';}
  if(!roles.length) {warn('unknown_thread_source');return 'unknown';}return roles[0];
 }

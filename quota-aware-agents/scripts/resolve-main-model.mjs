@@ -80,7 +80,9 @@ function resolve(o) {
   if(('active_turn_id' in l&&l.active_turn_id!==host.turn_id)||(l.turn_id&&l.turn_id!==host.turn_id)||(l.model&&l.model!==host.model)||(l.effort&&host.effort&&l.effort!==host.effort))return unknown('host_local_metadata_conflict',{thread_id:thread});
  } else if(l.reason)return unknown(l.reason,{thread_id:thread,turn_id:l.turn_id||null});
  const current=host||l,source=host?'host_metadata':'local_rollout';
- const strategy=({'gpt-6-astra':'astra_main','gpt-6.1-sol':'sol_main','gpt-6-sol':'other_known','gpt-6-luna':'other_known'})[current.model]||'unknown';
- return {...empty,status:strategy==='unknown'?'unknown':'known',model:current.model,effort:current.effort||null,source,thread_id:thread,turn_id:current.turn_id,strategy,reason:strategy==='unknown'?'unmapped_model':null};
+ // Retain legacy labels for existing consumers. Identity is established by binding above.
+ const legacyLabels = new Map([['gpt-6-astra', 'astra_main'], ['gpt-6.1-sol', 'sol_main']]);
+ const strategy = legacyLabels.get(current.model) ?? 'other_known';
+ return {...empty,status:'known',model:current.model,effort:current.effort||null,source,thread_id:thread,turn_id:current.turn_id,strategy,reason:null};
 }
 try {const o=args();console.log(o?JSON.stringify(resolve(o)):help);}catch(e){console.error(/^(Unknown argument|Duplicate argument|Missing value|Invalid )/.test(e.message)?e.message:'Model resolution failed; source data withheld.');process.exitCode=1;}

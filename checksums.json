@@ -1,8 +1,8 @@
 {
   "name": "quota-aware-agents",
   "author": "malioe",
-  "version": "1.5.1",
-  "version_date": "2026-10-09",
+  "version": "1.7.0",
+  "version_date": "2026-11-19",
   "files": [
     {
       "path": "agents/openai.yaml",
@@ -13,12 +13,8 @@
       "sha256": "8C99E8286780C80F9A0FAFE30D6848BBE7692FBA7EFB511FEED6D0CE5CB65B1F"
     },
     {
-      "path": "references/astra-consultation.md",
-      "sha256": "F29C6FF8119919CC6B692808CBAB2D0CA060AB1222192550C30D41CB97A567C4"
-    },
-    {
       "path": "references/cost-model.md",
-      "sha256": "F54F9A5DDCE40F9DFF348AF5F4CE52C71CACFF64F82FA0C385D0734E14E738AE"
+      "sha256": "A1D03D9CDF4EC1E7B6CDB779832460908E7A3550E7B38F6005577F5CA4159E82"
     },
     {
       "path": "references/execution-evidence.md",
@@ -26,23 +22,23 @@
     },
     {
       "path": "references/model-identification.md",
-      "sha256": "92D08DB0ADFB98D3FDD0BDD37C3D383B223A7D935559C50909DD331675AFD15B"
+      "sha256": "92D437C3637EB83DC645C1EF1971862E11ED7074ACE5CB1FC59BB35950F7AB46"
     },
     {
       "path": "references/model-routing.md",
-      "sha256": "6F4D74CC885C16A5C194C169EEB6CC09B3045D8A9EA6742F1168FC44E5359414"
+      "sha256": "C5750AC1025B9BAAE0A8FA19C3843B4FF4BD8FA8CB6A92A41B12F6001D8E1B97"
     },
     {
       "path": "references/speed-following.md",
-      "sha256": "DDCE423A176DD353ADD12218C28BD76DA690D8A5060A02BA01119C9BF51B0BC9"
+      "sha256": "10FFCD2BA82093267B73799F4522F97BD6738F47B7A716ABDDAC73C5E9BBA7D8"
     },
     {
       "path": "scripts/resolve-main-model.mjs",
-      "sha256": "D33F369ED0AD01497948B1BD52898FE5C73C406F108BCACF021B72CA4BC29883"
+      "sha256": "969B21C28FE1D8864485A70B355BF95B32FD20AD931D4BD9FC3BB6CD62BF184A"
     },
     {
       "path": "scripts/summarize-usage.mjs",
-      "sha256": "9C5C4E9E098C5BF7E5E8A44060BE835F72F1E9F8A3D4ECBE3DF01B6ACBF3A8E9"
+      "sha256": "61D83878A612EB412EF0D442A65596FCAF157F9F68D15195F5C44E092D3BD60E"
     },
     {
       "path": "scripts/telemetry-utils.mjs",
@@ -50,7 +46,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "53835B46A94F5046D78080A2EA93E234E62B6FA43A2852600F25D61109EDE4A2"
+      "sha256": "F8B17A1DBD095B17CC5406D8EC37162348F77179E4763F25DA8A97ACD85FCC88"
     }
   ]
 }
